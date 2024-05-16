@@ -248,3 +248,83 @@ nav {
     grid-area: 1/1/2/2;
   }
 }
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%; /* Ensure the search bar covers the full width of its container */
+}
+
+.search input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1.1rem; /* Set the font size of the input */
+}
+
+.search-btn {
+  padding: 0.75rem 1.5rem;
+  min-width: 100px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.search-btn i {
+  margin-right: 0.5rem; /* Add margin to the right of the icon for spacing */
+}
+
+.hospitals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.hospital {
+  flex: 1 1 300px;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hospital img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.hospital h3 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.hospital p {
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+.hospital button {
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search input {
+    margin-bottom: 1rem;
+  }
+
+  .hospitals {
+    justify-content: center;
+  }
+}
