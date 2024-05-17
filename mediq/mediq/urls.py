@@ -27,6 +27,6 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('doclogin/', views.doclogin, name="login"),
     path('docreg/',views.docreg, name="docregister"),
-    path('patreg/',views.patreg, name="patreg")
-<<<<<<< HEAD
+    path('patreg/',views.patreg, name="patreg"),
+    path('book/',views.book, name="book")
 ]
