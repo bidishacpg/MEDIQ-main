@@ -16,6 +16,15 @@ def docreg(request):
 def patreg(request):
     return render(request,"patregister.html")
 
+def patlogin(request):
+    return render(request,"patlogin.html")
+
+def hosplogin(request):
+    return render(request,"hosplogin.html")
+
+
+
+
 
 
 

@@ -28,6 +28,8 @@ urlpatterns = [
     path('patreg/',views.patreg, name="patreg"),
      path('doclogin/', views.doclogin, name="login"),
     path('docreg/',views.docreg, name="docregister"),
-    path('book/',views.book, name="book")
+    path('book/',views.book, name="book"),
+    path('patlogin/',views.patlogin, name="patlogin"),
+    path('hosplogin/',views.hosplogin, name="hosplogin")
 ]
 

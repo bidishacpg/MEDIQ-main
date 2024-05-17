@@ -1,30 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/docreg.css">
-    <title>Doctor Registration Form</title>
-    
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/docregg.css">
+    <link rel="stylesheet" href="/static/indexx.css">
+
+    <title> MEDIQUICK</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">MEDIQUICK</div>
+        <ul class="nav__links">
+          <li class="link"><a href="#">Home</a></li>
+          <li class="link"><a href="#">About Us</a></li>
+          <li class="link"><a href="#">Services</a></li>
+          <li class="link"><a href="#">Doctors</a></li>
+          <li class="link"><a href="#">Hospitals</a></li>
+          <li class="link"><a href="#">Contact</a></li>
+          <li class="dropdown">
+            <button class="dropbtn">Login/Register</button>
+            <div class="dropdown-content">
+              <a href="patlogin.html">Patient</a>
+              <a href="hosplogin.html">Hospital</a>
+              <a href="doclogin.html">Doctor</a>
+            </div>
+          </li>
+     <!--<button class="btn">Login/Register</button> -->
+      </nav>
+    <div class="signup-container">
     <h2>Doctor Registration Form</h2>
+    <div class="form-wrapper">
+        <div class="form-left">
     <form action="#" method="POST">
         <fieldset>
             <legend>Personal Information</legend>
-            <label for="fullName">FullName:</label><br>
+            <label for="fullName">Fullname:</label><br>
             <input type="text" id="fullName" name="fullName" required><br>
             
-            <label for="gender">Gender:</label></br>
-            <input type="radio" id="male" name="gender" value="male" required>
-            <label for="male">Male</label>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">Female</label>
-            <input type="radio" id="others" name="gender" value="others">
-            <label for="others">Others</label><br>
+
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <small class="error-message" id="genderError"></small>
+            </div>
             
             <label for="dob">DOB:</label><br>
             <input type="date" id="dob" name="dob" required><br>
+            <label for="languages">Languages Spoken:</label><br>
+            <input type="text" id="languages" name="languages"><br>
+            
             
             <label for="nationality">Nationality:</label><br>
             <input type="text" id="nationality" name="nationality" required><br>
@@ -35,9 +71,8 @@
             <label for="email">Email Address:</label><br>
             <input type="email" id="email" name="email" required><br>
             
-        </fieldset>
-
-        <fieldset>
+    </div>
+    <div class="form-right">
             <legend>Professional Information</legend>
             <label for="medicalDegree">Medical Degree:</label><br>
             <input type="text" id="medicalDegree" name="medicalDegree" required><br>
@@ -48,9 +83,6 @@
             <label for="specialization">Specialization:</label><br>
             <input type="text" id="specialization" name="specialization" required><br>
 
-            <label for="languages">Languages Spoken:</label><br>
-            <input type="text" id="languages" name="languages"><br>
-            
             <label for="experience">Years of Experience:</label><br>
             <input type="number" id="experience" name="experience" required><br>
             
@@ -65,13 +97,10 @@
             
             <label for="workEmail">Email Address (Work):</label><br>
             <input type="email" id="workEmail" name="workEmail" required><br>
-        </fieldset>
-
-      
-        
-
-
         <input type="submit" value="Submit">
+    </fieldset>
     </form>
+</div>
+</div>
 </body>
 </html>

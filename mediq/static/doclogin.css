@@ -1,0 +1,124 @@
+:root {
+  --primary-color: #1B3C73;
+  --primary-color-dark: #40679E;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --white: #ffffff;
+}
+body{
+  background-image: url("/static/img/log.jpeg");
+  background-size: cover;
+}
+.log{
+  height:100%;
+  width:80%;
+  background-position:center ;
+  background-size: cover;
+  position: absolute;
+  bottom: -80px;
+}
+.form-box{
+  width: 390px;
+  height:500px;
+  position: relative;
+  margin: 6% auto;
+  background: #ede8e8;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.btn-box{
+  width:190px;
+  margin:35px auto;
+  position:relative;
+  box-shadow:0 0 12px 4px #1B3C73;
+  border-radius: 5px;
+
+}
+.btn-box h3{
+  font-style:oblique;
+  margin-top: auto;
+  padding: 20px;
+  color: black;
+  background: transparent;
+  position: relative;
+}
+.icons{
+  margin:30px auto;
+  text-align:center;
+}
+.icons img{
+  width :30px;
+  margin: 0 12px;
+  box-shadow: #ff105f;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.input{
+  top:180px ;
+  position: absolute;
+  width: 200px;
+  transition: .5s;
+  left:80px;
+}
+
+.input-field{
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom:1px solid #999;
+  outline:none;
+  background: transparent;
+  position: relative;
+}
+.submit-btn{
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
+  color: var(--white);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
+.checkbox{
+  margin: 30px 10px 30px 0;
+}
+span{
+  color:#777;
+  font-size: 12px;
+  bottom: 795px;
+  position: absolute;
+}
+.reg{
+  margin:30px;
+  background-color:none;
+  text-align: center;
+  font-size: 15px;
+  bottom: 500px;
+  color: var(--text-dark);
+  width: 90%;
+}
+.reg p{
+  margin:20px;
+  background-color:none;
+  text-align: center;
+  font-size: 15px;
+  bottom: 500px;
+  color: var(--text-dark);
+  width: 90%;
+}
+.reg a{
+  color: var(--text-dark);
+  text-align: center;
+  font-size: 18px;
+  bottom: 300px;
+  margin:10px;
+}
+
+
