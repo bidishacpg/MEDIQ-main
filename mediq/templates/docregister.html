@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/docreg.css">
+    <title>Doctor Registration Form</title>
+    
+</head>
+<body>
+    <h2>Doctor Registration Form</h2>
+    <form action="#" method="POST">
+        <fieldset>
+            <legend>Personal Information</legend>
+            <label for="fullName">FullName:</label><br>
+            <input type="text" id="fullName" name="fullName" required><br>
+            
+            <label for="gender">Gender:</label></br>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="others" name="gender" value="others">
+            <label for="others">Others</label><br>
+            
+            <label for="dob">DOB:</label><br>
+            <input type="date" id="dob" name="dob" required><br>
+            
+            <label for="nationality">Nationality:</label><br>
+            <input type="text" id="nationality" name="nationality" required><br>
+            
+            <label for="contactNumber">Contact Number:</label><br>
+            <input type="tel" id="contactNumber" name="contactNumber" required><br>
+            
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            
+        </fieldset>
+
+        <fieldset>
+            <legend>Professional Information</legend>
+            <label for="medicalDegree">Medical Degree:</label><br>
+            <input type="text" id="medicalDegree" name="medicalDegree" required><br>
+            
+            <label for="licenseNumber">Medical License Number:</label><br>
+            <input type="text" id="licenseNumber" name="licenseNumber" required><br>
+            
+            <label for="specialization">Specialization:</label><br>
+            <input type="text" id="specialization" name="specialization" required><br>
+
+            <label for="languages">Languages Spoken:</label><br>
+            <input type="text" id="languages" name="languages"><br>
+            
+            <label for="experience">Years of Experience:</label><br>
+            <input type="number" id="experience" name="experience" required><br>
+            
+            <label for="workplace">Current Workplace:</label><br>
+            <input type="text" id="workplace" name="workplace" required><br>
+            
+            <label for="workAddress">Work Address:</label><br>
+            <textarea id="workAddress" name="workAddress" rows="4" required></textarea><br>
+            
+            <label for="workContact">Contact Number (Work):</label><br>
+            <input type="tel" id="workContact" name="workContact" required><br>
+            
+            <label for="workEmail">Email Address (Work):</label><br>
+            <input type="email" id="workEmail" name="workEmail" required><br>
+        </fieldset>
+
+      
+        
+
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
