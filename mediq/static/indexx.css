@@ -27,13 +27,13 @@
   display: inline-block;
 }
 .no-underline {
-  text-decoration: none; /* Remove underline */
-  color: white; /* Ensure text color matches button text color */
-  display: block; /* Make the anchor tag block level */
-  height: 100%; /* Full height of the button */
-  width: 100%; /* Full width of the button */
-  text-align: center; /* Center the text horizontally */
-  line-height: inherit; /* Center the text vertically */
+  text-decoration: none; 
+  color: white;
+  display: block;
+  height: 100%; 
+  width: 100%; 
+  text-align: center; 
+  line-height: inherit; 
 }
 
 
