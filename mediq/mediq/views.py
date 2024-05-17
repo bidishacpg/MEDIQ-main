@@ -6,4 +6,8 @@ def home(request):
 
 def patreg(request):
     return render(request,"patregister.html")
+
+
+
+
     
