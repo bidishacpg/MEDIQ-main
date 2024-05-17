@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 :root {
-  --primary-color: #28bf96;
-  --primary-color-dark: #209677;
+  --primary-color: #1B3C73;
+  --primary-color-dark: #40679E;
   --text-dark: #111827;
   --text-light: #6b7280;
   --white: #ffffff;
@@ -27,13 +27,13 @@
   display: inline-block;
 }
 .no-underline {
-  text-decoration: none; /* Remove underline */
-  color: white; /* Ensure text color matches button text color */
-  display: block; /* Make the anchor tag block level */
-  height: 100%; /* Full height of the button */
-  width: 100%; /* Full width of the button */
-  text-align: center; /* Center the text horizontally */
-  line-height: inherit; /* Center the text vertically */
+  text-decoration: none; 
+  color: white;
+  display: block;
+  height: 100%; 
+  width: 100%; 
+  text-align: center; 
+  line-height: inherit; 
 }
 
 

@@ -27,4 +27,17 @@ urlpatterns = [
 
 ]
 
+<<<<<<< HEAD
 
+=======
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',views.home, name="home"),
+<<<<<<< HEAD
+    path('doclogin/', views.doclogin, name="login")
+=======
+    path('docreg/',views.docreg, name="docregister"),
+    path('patreg/',views.patreg, name="patreg")
+>>>>>>> 4cd2ae36c7fefb81c73acdd43f7aab78ddf5a894
+]
+>>>>>>> e7cc38101d743837789281a35540a985e617608e
