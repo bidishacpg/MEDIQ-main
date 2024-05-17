@@ -25,10 +25,16 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
+<<<<<<< HEAD
     path('patreg/',views.patreg, name="patreg"),
+=======
+>>>>>>> 69db70a8250ae262f205a4fa4b6da5435623ea62
     path('doclogin/', views.doclogin, name="login"),
     path('docreg/',views.docreg, name="docregister"),
     path('book/',views.book, name="book")
 ]
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 69db70a8250ae262f205a4fa4b6da5435623ea62

@@ -16,7 +16,10 @@ def docreg(request):
 def patreg(request):
     return render(request,"patregister.html")
 
+<<<<<<< HEAD
 
 
 
     
+=======
+>>>>>>> 69db70a8250ae262f205a4fa4b6da5435623ea62
