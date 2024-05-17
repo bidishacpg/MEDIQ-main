@@ -32,5 +32,4 @@ urlpatterns = [
 =======
     path('docreg/',views.docreg, name="docregister"),
     path('patreg/',views.patreg, name="patreg")
->>>>>>> 4cd2ae36c7fefb81c73acdd43f7aab78ddf5a894
 ]
