@@ -20,12 +20,30 @@ from mediq import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+<<<<<<< HEAD
 
+=======
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',views.home, name="home"),
+    path('book/',views.book, name="book")
 
+]
+>>>>>>> 0ee13d0627cb5f07a91306d0d790027f70f4e887
+
+<<<<<<< HEAD
+
+=======
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
     path('doclogin/', views.doclogin, name="login"),
     path('docreg/',views.docreg, name="docregister"),
     path('patreg/',views.patreg, name="patreg")
+<<<<<<< HEAD
 ]
+=======
+>>>>>>> 4cd2ae36c7fefb81c73acdd43f7aab78ddf5a894
+]
+>>>>>>> e7cc38101d743837789281a35540a985e617608e
+>>>>>>> 0ee13d0627cb5f07a91306d0d790027f70f4e887
