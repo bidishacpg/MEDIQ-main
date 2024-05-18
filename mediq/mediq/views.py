@@ -64,10 +64,7 @@ def doclogin(request):
         else:
             # Handle invalid login
             return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
-        return render(request, "doclogin.html")
-
-
-
+     return render(request, "doclogin.html")
 def patreg(request):
     if request.method=="POST":
       first_name =request.POST.get('first_name')

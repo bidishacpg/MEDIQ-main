@@ -37,6 +37,9 @@
         <div class="form-box">
             <div class="btn-box">
             <h3>Login here</h3>
+            {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
 
             </div>
             <div class="icons">
@@ -45,10 +48,10 @@
             <img src="/static/img/goog.png">
 </div>
 
-<form action="doclogin.html" method="post" name="form1" class="input" onsubmit="return validateForm()">
-
-    <input type="text" class="input-field" name="doctoremail"placeholder="Enter your doctoremail" >
-    <input type="password" class="input-field" name="password" placeholder="Enter your Password" >
+<form action="{% url 'doclogin' %}"method="post" name="form1" class="input" onsubmit="return validateForm()">
+  {% csrf_token %}
+    Email<input type="text" class="input-field" name="email"placeholder="Enter your doctoremail" >
+   Password <input type="password" class="input-field" name="password" placeholder="Enter your Password" >
     <input type="checkbox" class="checkbox"><span>Remember Password </span>
     <button type="submit" class="submit-btn" name="Login">Login</button>
     <div class="container reg">
