@@ -20,13 +20,16 @@ from mediq import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
+    path('patreg/',views.patreg, name="patreg"),
+     path('doclogin/', views.doclogin, name="login"),
     path('docreg/',views.docreg, name="docregister"),
-    path('patreg/',views.patreg, name="patreg")
+    path('book/',views.book, name="book"),
+    path('patlogin/',views.patlogin, name="patlogin"),
+    path('hosplogin/',views.hosplogin, name="hosplogin")
 ]
+
