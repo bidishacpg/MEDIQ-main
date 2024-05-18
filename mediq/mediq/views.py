@@ -65,6 +65,10 @@ def patreg(request):
       en= Patientreg(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital , doctor=doctor )
       en.save()
     return render(request,"patregister.html")
+<<<<<<< HEAD
+def hospreg(request):
+    return render(request,'hospregister.html')
+=======
 
 def patlogin(request):
     return render(request,"patlogin.html")
@@ -83,3 +87,4 @@ def aboutus(request):
 
 
     
+>>>>>>> fa89ebb5777f95629d8c6f84b548fb17d7823e92
