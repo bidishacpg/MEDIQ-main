@@ -8,6 +8,7 @@ class Docreg(models.Model):
     nationality=models.CharField(max_length=50)
     contactNumber=models.CharField(max_length=50)
     email=models.CharField(max_length=50)
+    password=models.CharField(max_length=50)
     medicalDegree=models.CharField(max_length=50)
     licenseNumber=models.CharField(max_length=50)
     specialization=models.CharField(max_length=50)
