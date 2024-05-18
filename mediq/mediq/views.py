@@ -72,6 +72,10 @@ def patlogin(request):
 def hosplogin(request):
     return render(request,"hosplogin.html")
 
+def aboutus(request):
+    return render(request,"aboutus.html")
+
+
 
 
 
