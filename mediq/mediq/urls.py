@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
     path('doclogin/', views.doclogin, name="login"),
-    path('docreg/',views.docreg, name="docregister"),
+    path('docreg/',views.docreg, name="docreg"),
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister")
