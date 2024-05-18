@@ -29,5 +29,5 @@ urlpatterns = [
     path('docreg/',views.docreg, name="docreg"),
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
-    path('hospregister/',views.hospreg, name="hospregister")
+    path('hospreg/',views.hospreg, name="hospreg")
 ]
