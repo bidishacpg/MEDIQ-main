@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from patientreg.models import Patientreg
+from docreg.models import Docreg
 
 def home(request):
     return render(request,"index.html")
@@ -12,28 +14,40 @@ def doclogin(request):
 
 def docreg(request):
     if request.method=="POST":
-    fullname =request.POST.get('fullname')
-    gender=request.POST.get('gender')
-    dob=request.POST.get('dob')
-    languages=request.POST.get('languages')
-    nationality=request.POST.get('nationality')
-    contactNumber=request.POST.get('contactnumber')
-    email=request.POST.get('email')
-    medicalDegree=request.POST.get('medicalDegree')
-    licenseNumber=request.POST.get('licenseNumber')
-    specialization=request.POST.get('specialization')
-    experience=request.POST.get('experience')
-    workplace=request.POST.get('workplace')
-    workAddress=request.POST.get('workAddress')
-    workcontact=request.POST.get('workcontact')
-    workEmail=request.POST.get('workEmail')
+      fullname =request.POST.get('fullname')
+      gender =request.POST.get('gender')
+      dob =request.POST.get('dob')
+      nationality=request.POST.get('nationality')
+      languages=request.POST.get('languages')
+      contactNumber =request.POST.get('contactNumber')
+      email =request.POST.get('email')
+      medicalDegree =request.POST.get('medicalDegree')
+      licenseNumber =request.POST.get('licenseNumber')
+      specialization =request.POST.get('specialization')
+      experience =request.POST.get('experience')
+      workplace =request.POST.get('workplace')
+      workAddress =request.POST.get('workAddress')
+      workContact =request.POST.get('workContact')
+      workEmail =request.POST.get('workEmail')
+      
 
-    en= Docreg(fullname=fullname, gender=gender, dob=dob, languages=languages, nationality=nationality, contactNumber=contactNumber,
-                email=email, medicalDegree=medicalDegree , licenseNumber=licenseNumber,
-                specialization=specialization,experience=experience,workplace=workplace,
-                workAddress=workAddress,workcontact=workcontact,workEmail=workEmail)
-    en.save()
-    return render(request,"docregister.html")
+      en= Docreg(fullname=fullname,
+                gender=gender,
+                dob=dob,
+                languages=languages,
+                nationality=nationality,
+                contactNumber=contactNumber,
+                email=email,
+                medicalDegree=medicalDegree,
+                licenseNumber=licenseNumber,
+                specialization=specialization,
+                experience=experience,
+                workplace=workplace,
+                workAddress=workAddress,
+                workContact=workContact,
+                workEmail=workEmail )
+      en.save()
+    return render(request, "docregister.html")
 
 def patreg(request):
     if request.method=="POST":

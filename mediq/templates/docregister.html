@@ -37,15 +37,13 @@
     <h2>Doctor Registration Form</h2>
     <div class="form-wrapper">
         <div class="form-left">
-    <form  method="POST" action="{% url 'docreg' %}" >
-     {% csrf_token %}
+    <form action="{% url 'docreg' %}" method="POST" >
+      {% csrf_token %} 
         <fieldset>
             <legend>Personal Information</legend>
-            <label for="firstname">Firstname:</label><br>
-            <input type="text" id="firstname" name="firstname" required><br>
+            <label for="fullname">Fullname:</label><br>
+            <input type="text" id="fullname" name="fullname" required><br>
 
-            <label for="lastname">Lastname:</label><br>
-            <input type="text" id="lastname" name="lastname" required><br>
 
           
             <div class="form-group">
