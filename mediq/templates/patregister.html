@@ -26,7 +26,8 @@
         <h2>Patient Signup</h2>
         <div class="form-wrapper">
             <div class="form-left">
-        <form id="signupForm" action="/submit_signup" method="post">
+        <form id="signupForm" action="{% url 'patreg' %}" method="post">
+            {% csrf_token %} 
             <div class="form-group">
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" required>

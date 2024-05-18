@@ -27,9 +27,10 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('patreg/',views.patreg, name="patreg"),
      path('doclogin/', views.doclogin, name="login"),
-    path('docreg/',views.docreg, name="docregister"),
+    path('docreg/',views.docreg, name="docreg"),
     path('book/',views.book, name="book"),
     path('patlogin/',views.patlogin, name="patlogin"),
-    path('hosplogin/',views.hosplogin, name="hosplogin")
+    path('hosplogin/',views.hosplogin, name="hosplogin"),
+    path('aboutus/',views.aboutus, name="aboutus")
 ]
 
