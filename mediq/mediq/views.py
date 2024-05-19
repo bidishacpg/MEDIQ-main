@@ -98,11 +98,8 @@ def about(request):
 def hospreg(request):
     return render(request,'hospregister.html')
 
-<<<<<<< HEAD
 def doclist(request):
     return render(request,'doclist.html')
 
 def hosdetail(request):
     return render(request,'hosdetail.html')
-=======
->>>>>>> c743a2302aa27ebab2735d33d093103300a094d5

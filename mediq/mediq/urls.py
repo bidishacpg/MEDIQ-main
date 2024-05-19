@@ -30,12 +30,8 @@ urlpatterns = [
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
     path('hospreg/',views.hospreg, name="hospreg"),
-<<<<<<< HEAD
     path('doclist/',views.doclist, name="doclist"),
-    path('hosdetail/',views.hosdetail, name="hosdetail")
-    
-    
-=======
+    path('hosdetail/',views.hosdetail, name="hosdetail"),
     path('about/',views.about, name="about")
->>>>>>> c743a2302aa27ebab2735d33d093103300a094d5
+
 ]
