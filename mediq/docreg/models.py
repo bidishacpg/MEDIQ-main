@@ -17,3 +17,4 @@ class Docreg(models.Model):
     workContact=models.CharField(max_length=50)
     workEmail=models.CharField(max_length=50)
     password = models.CharField(max_length=128, null=True, blank=True)
+    photo = models.ImageField(upload_to='media/',max_length=250,null=True,default=None)

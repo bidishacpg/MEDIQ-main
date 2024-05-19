@@ -32,6 +32,7 @@ def docreg(request):
       workAddress =request.POST.get('workAddress')
       workContact =request.POST.get('workContact')
       workEmail =request.POST.get('workEmail')
+      photo=request.POST.get('photo')
       
 
       en= Docreg(fullname=fullname,
@@ -49,7 +50,8 @@ def docreg(request):
                 workplace=workplace,
                 workAddress=workAddress,
                 workContact=workContact,
-                workEmail=workEmail )
+                workEmail=workEmail,
+                 photo=photo )
       en.save()
       return redirect('/doclogin')
     return render(request, "docregister.html")
@@ -99,7 +101,12 @@ def hospreg(request):
     return render(request,'hospregister.html')
 
 def doclist(request):
-    return render(request,'doclist.html')
+    doclist=Docreg.objects.all()
+
+    dat={
+        'doclist':doclist
+    }
+    return render(request,'doclist.html',dat)
 
 def hosdetail(request):
     return render(request,'hosdetail.html')
