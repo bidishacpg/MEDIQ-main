@@ -13,47 +13,58 @@ def home(request):
 def book(request):
     return render(request,'appoint.html')
 
-
 def docreg(request):
-    if request.method=="POST":
-      fullname =request.POST.get('fullname')
-      gender =request.POST.get('gender')
-      dob =request.POST.get('dob')
-      nationality=request.POST.get('nationality')
-      languages=request.POST.get('languages')
-      contactNumber =request.POST.get('contactNumber')
-      email =request.POST.get('email')
-      password=request.POST.get('password')
-      medicalDegree =request.POST.get('medicalDegree')
-      licenseNumber =request.POST.get('licenseNumber')
-      specialization =request.POST.get('specialization')
-      experience =request.POST.get('experience')
-      workplace =request.POST.get('workplace')
-      workAddress =request.POST.get('workAddress')
-      workContact =request.POST.get('workContact')
-      workEmail =request.POST.get('workEmail')
-      photo=request.POST.get('photo')
-      
+    if request.method == "POST":
+        fullname = request.POST.get('fullname')
+        gender = request.POST.get('gender')
+        dob = request.POST.get('dob')
+        nationality = request.POST.get('nationality')
+        languages = request.POST.get('languages')
+        contactNumber = request.POST.get('contactNumber')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        medicalDegree = request.POST.get('medicalDegree')
+        licenseNumber = request.POST.get('licenseNumber')
+        specialization = request.POST.get('specialization')
+        experience = request.POST.get('experience')
+        workplace = request.POST.get('workplace')
+        workAddress = request.POST.get('workAddress')
+        workContact = request.POST.get('workContact')
+        workEmail = request.POST.get('workEmail')
+        photo = request.POST.get('photo')
+        monday_start = request.POST.get('monday_start')
+        monday_end = request.POST.get('monday_end')
+        tuesday_start = request.POST.get('tuesday_start')
+        tuesday_end = request.POST.get('tuesday_end')
+        wednesday_start = request.POST.get('wednesday_start')
+        wednesday_end = request.POST.get('wednesday_end')
+        thursday_start = request.POST.get('thursday_start')
+        thursday_end = request.POST.get('thursday_end')
+        friday_start = request.POST.get('friday_start')
+        friday_end = request.POST.get('friday_end')
+        saturday_start = request.POST.get('saturday_start')
+        saturday_end = request.POST.get('saturday_end')
+        sunday_start = request.POST.get('sunday_start')
+        sunday_end = request.POST.get('sunday_end')
 
-      en= Docreg(fullname=fullname,
-                gender=gender,
-                dob=dob,
-                languages=languages,
-                nationality=nationality,
-                contactNumber=contactNumber,
-                email=email,
-                password=password,
-                medicalDegree=medicalDegree,
-                licenseNumber=licenseNumber,
-                specialization=specialization,
-                experience=experience,
-                workplace=workplace,
-                workAddress=workAddress,
-                workContact=workContact,
-                workEmail=workEmail,
-                 photo=photo )
-      en.save()
-      return redirect('/doclogin')
+        en = Docreg(
+            fullname=fullname, gender=gender, dob=dob, languages=languages, nationality=nationality,
+            contactNumber=contactNumber, email=email, password=password, medicalDegree=medicalDegree,
+            licenseNumber=licenseNumber, specialization=specialization, experience=experience,
+            workplace=workplace, workAddress=workAddress, workContact=workContact, workEmail=workEmail,
+            photo=photo,monday_start=monday_start,
+            monday_end=monday_end, tuesday_start=tuesday_start,
+            tuesday_end=tuesday_end, wednesday_start=wednesday_start,
+            wednesday_end=wednesday_end, thursday_start=thursday_start,
+            thursday_end=thursday_end, friday_start=friday_start,
+            friday_end=friday_end, saturday_start=saturday_start,
+            saturday_end=saturday_end, sunday_start=sunday_start,
+            sunday_end=sunday_end
+        )
+
+        en.save()
+        return redirect('/doclogin')  # Redirect to login page after successful registration
+
     return render(request, "docregister.html")
 
 def doclogin(request):
@@ -106,7 +117,7 @@ def doclist(request):
     dat={
         'doclist':doclist
     }
-    return render(request,'doclist.html',dat)
+    return render(request,"doclist.html",dat)
 
 def hosdetail(request):
     return render(request,'hosdetail.html')

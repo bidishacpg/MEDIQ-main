@@ -4,17 +4,21 @@
     --text-dark: #111827;
     --text-light: #6b7280;
     --white: #ffffff;
-  }
-  body {
+}
+
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-image:url(static/img/doco.jpg);
+    background-image: url(static/img/doco.jpg);
     background-size: cover;
-  }
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
 h2 {
     text-align: center;
+    color: var(--primary-color);
 }
 
 form {
@@ -23,17 +27,17 @@ form {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    height: 100%;
+    background-color: var(--white);
 }
 
 fieldset {
     margin-bottom: 20px;
     border: none;
-    
 }
+
 .signup-container {
     width: 100%;
-    max-width: 900px; /* Increased max-width to accommodate two sides */
+    max-width: 900px;
     margin: 2rem auto;
     background-color: #feffff;
     padding: 2rem;
@@ -49,16 +53,18 @@ fieldset {
 
 .form-wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .form-left,
 .form-right {
-    flex: 1; /* Each side takes up equal space */
-    padding: 0 1rem; /* Add some padding between the sides */
+    flex: 1;
+    padding: 0 1rem;
 }
+
 .form-group {
-    margin-bottom: 1.5rem; /* Increased margin-bottom for better spacing */
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
@@ -85,8 +91,8 @@ fieldset {
 button.btn {
     width: 100%;
     padding: 0.75rem;
-    background-color: #2c3e50;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--white);
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -94,51 +100,25 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: #34495e;
+    background-color: var(--primary-color-dark);
 }
-
 
 legend {
     font-weight: bold;
 }
 
-
-
 /* Adjusting the width and display for gender and date of birth labels */
-label[for="gender"],label[for="photo"] {
+label[for="gender"],
+label[for="photo"] {
     display: inline-block;
-    width: 70px; /* Adjust the width as needed */
+    width: 70px;
     margin-bottom: 10px;
 }
+
 label[for="dob"] {
     display: inline-block;
-    width: 70px; /* Adjust the width as needed */
+    width: 70px;
     margin-bottom: 20px;
-}
-
-/* Adjusting the width and display for radio buttons and date input */
-input[type="radio"] {
-    width: auto; /* Adjust the width as needed */
-    margin-bottom: 10px;
-    display: inline-block;
-    vertical-align: top;
-}
-input[type="date"] {
-    width: auto; /* Adjust the width as needed */
-    margin-bottom: 30px;
-    display: inline-block;
-    vertical-align: top;
-}
-
-/* Styling radio buttons */
-input[type="radio"] + label {
-    display: inline;
-    margin-right: 10px;
-}
-
-/* Handling margin-right for the last radio button in a row */
-input[type="radio"]:nth-child(3n) + label {
-    margin-right: 0;
 }
 
 /* Styling input fields */
@@ -147,7 +127,9 @@ input[type="tel"],
 input[type="email"],
 textarea,
 select,
-input[type="number"] {
+input[type="number"],
+input[type="date"],
+input[type="password"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -155,18 +137,11 @@ input[type="number"] {
     border-radius: 4px;
     box-sizing: border-box;
 }
-input[type="password"]{
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-}
+
 /* Styling submit button */
 input[type="submit"] {
-    background-color: #2c3e50;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--white);
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -176,12 +151,63 @@ input[type="submit"] {
 
 /* Hover effect for submit button */
 input[type="submit"]:hover {
-    background-color: #40679E;
+    background-color: var(--primary-color-dark);
 }
 
+/* Styling availability section */
 /* Responsive styling for form */
 @media screen and (max-width: 600px) {
-    form {
-        width: 90%;
+    .form-wrapper {
+        flex-direction: column;
     }
+    .form-left, .form-center, .form-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .form-group label {
+        width: 100px;
+        margin-right: 10px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        flex: 1;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .form-group span {
+        margin: 0 10px;
+    }
+    .error-message {
+        color: red;
+        font-size: 0.8em;
+        margin-left: 10px;
+    }
+    fieldset {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    legend {
+        padding: 0 10px;
+        font-weight: bold;
+    }
+
+input[type="time"] {
+    padding: 10x;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+span {
+    margin: 0 10px;
+}
 }
