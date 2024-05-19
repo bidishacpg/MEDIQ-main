@@ -29,5 +29,9 @@ urlpatterns = [
     path('docreg/',views.docreg, name="docreg"),
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
-    path('hospreg/',views.hospreg, name="hospreg")
+    path('hospreg/',views.hospreg, name="hospreg"),
+    path('doclist/',views.doclist, name="doclist"),
+    path('hosdetail/',views.hosdetail, name="hosdetail")
+    
+    
 ]

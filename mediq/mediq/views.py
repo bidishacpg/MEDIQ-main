@@ -69,3 +69,9 @@ def patreg(request):
 
 def hospreg(request):
     return render(request,'hospregister.html')
+
+def doclist(request):
+    return render(request,'doclist.html')
+
+def hosdetail(request):
+    return render(request,'hosdetail.html')
