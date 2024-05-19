@@ -55,17 +55,16 @@ def docreg(request):
 
 def doclogin(request):
      
-     #if request.method == "POST":
-      #  email = request.POST.get('email')
-       # password = request.POST.get('password')
-       # Docreg = authenticate(request, email=email, password=password)
-       # if Docreg is not None:
-        #    login(request, Docreg)
-         #   return redirect("index.html")  # Redirect to dashboard or any other page
-        #else:
-            # Handle invalid login
-         #   return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
-     return render(request, "doclogin.html")
+     if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        Docreg = authenticate(request, email=email, password=password)
+        if Docreg is not None:
+            login(request, Docreg)
+            return redirect("index.html")  # Redirect to dashboard or any other page
+        else:
+            return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
+        return render(request, "doclogin.html")
 
 #subject='testing mail'
 #form_emails='bidishachapagai@gmail.com'
