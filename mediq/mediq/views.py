@@ -55,17 +55,26 @@ def docreg(request):
 
 def doclogin(request):
      
-     if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        Docreg = authenticate(request, email=email, password=password)
-        if Docreg is not None:
-            login(request, Docreg)
-            return redirect("index.html")  # Redirect to dashboard or any other page
-        else:
+     #if request.method == "POST":
+      #  email = request.POST.get('email')
+       # password = request.POST.get('password')
+       # Docreg = authenticate(request, email=email, password=password)
+       # if Docreg is not None:
+        #    login(request, Docreg)
+         #   return redirect("index.html")  # Redirect to dashboard or any other page
+        #else:
             # Handle invalid login
-            return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
+         #   return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
      return render(request, "doclogin.html")
+
+#subject='testing mail'
+#form_emails='bidishachapagai@gmail.com'
+#msg='<p>you have succesfully registered</p>'
+#to='ichhashah4681@gmail.com'
+#msg=EmailMultiAlternatives(subject,msg,form_emails,[to])
+#msg.content_subtype='html'
+#msg.send()
+
 def patreg(request):
     if request.method=="POST":
       first_name =request.POST.get('first_name')
@@ -83,6 +92,9 @@ def patreg(request):
       en.save()
     return render(request,"patregister.html")
 
+def about(request):
+    return render(request,'aboutus.html')
 
 def hospreg(request):
     return render(request,'hospregister.html')
+
