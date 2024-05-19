@@ -57,6 +57,9 @@
     <div class="container reg">
     <p>Haven't Registered Yet? <a href="/docreg">Register Here</a></p>
   </div>
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
 </form>
 
         </div>

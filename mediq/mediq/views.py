@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 #from django.core.mail import send_mail,EmailMultiAlternatives
@@ -64,7 +65,7 @@ def doclogin(request):
             return redirect("index.html")  # Redirect to dashboard or any other page
         else:
             return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
-        return render(request, "doclogin.html")
+     return render(request, "doclogin.html")
 
 #subject='testing mail'
 #form_emails='bidishachapagai@gmail.com'
