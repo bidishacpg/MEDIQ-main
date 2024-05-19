@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password
 from patientreg.models import Patientreg
 from docreg.models import Docreg
 
@@ -9,8 +11,6 @@ def home(request):
 def book(request):
     return render(request,'appoint.html')
 
-def doclogin(request):
-    return render(request,"doclogin.html")
 
 def docreg(request):
     if request.method=="POST":
@@ -21,6 +21,7 @@ def docreg(request):
       languages=request.POST.get('languages')
       contactNumber =request.POST.get('contactNumber')
       email =request.POST.get('email')
+      password=request.POST.get('password')
       medicalDegree =request.POST.get('medicalDegree')
       licenseNumber =request.POST.get('licenseNumber')
       specialization =request.POST.get('specialization')
@@ -38,6 +39,7 @@ def docreg(request):
                 nationality=nationality,
                 contactNumber=contactNumber,
                 email=email,
+                password=password,
                 medicalDegree=medicalDegree,
                 licenseNumber=licenseNumber,
                 specialization=specialization,
@@ -47,8 +49,22 @@ def docreg(request):
                 workContact=workContact,
                 workEmail=workEmail )
       en.save()
+      return redirect('/doclogin')
     return render(request, "docregister.html")
 
+def doclogin(request):
+     
+     if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        Docreg = authenticate(request, email=email, password=password)
+        if Docreg is not None:
+            login(request, Docreg)
+            return redirect("index.html")  # Redirect to dashboard or any other page
+        else:
+            # Handle invalid login
+            return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
+     return render(request, "doclogin.html")
 def patreg(request):
     if request.method=="POST":
       first_name =request.POST.get('first_name')

@@ -16,3 +16,4 @@ class Docreg(models.Model):
     workAddress=models.CharField(max_length=50)
     workContact=models.CharField(max_length=50)
     workEmail=models.CharField(max_length=50)
+    password = models.CharField(max_length=128, null=True, blank=True)
