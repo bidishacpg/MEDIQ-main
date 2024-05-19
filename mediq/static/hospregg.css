@@ -1,0 +1,202 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/static/img/reg.jpeg'); /* Ensure the correct path to your image */
+            background-size: cover;
+            
+        }
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+        :root {
+          --primary-color: #1B3C73;
+          --primary-color-dark: #40679E;
+          --text-dark: #111827;
+          --text-light: #6b7280;
+          --white: #ffffff;
+        }
+        
+        * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        
+        .btn {
+          padding: 1rem 2rem;
+          outline: none;
+          border: none;
+          font-size: 1rem;
+          color: var(--white);
+          background-color: var(--primary-color);
+          border-radius: 5px;
+          cursor: pointer;
+          transition: 0.3s;
+          display: inline-block;
+        }
+        .no-underline {
+          text-decoration: none; 
+          color: white;
+          display: block;
+          height: 100%; 
+          width: 100%; 
+          text-align: center; 
+          line-height: inherit; 
+        }
+        
+        
+        .btn:hover {
+          background-color: var(--primary-color-dark);
+        }
+        
+        body {
+          font-family: "Roboto", sans-serif;
+        }
+        
+        .containera {
+          max-width: 1200px;
+          margin: auto;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        nav {
+          padding: 2rem 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+        
+        .nav__logo {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--primary-color);
+        }
+        
+        .nav__links {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+        
+        
+        .link a {
+          text-decoration: none;
+          color: var(--text-light);
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        
+        .link a:hover {
+          color: var(--primary-color);
+        }
+        
+        .header {
+          padding: 0 1rem;
+          flex: 1;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+          }
+          
+          .dropdown-content a {
+            color: var(--text-dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+          }
+          
+          .dropdown-content a:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+          }
+          
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
+          
+          /* Adjustments to match the existing theme */
+          .dropbtn {
+            padding: 1rem 2rem;
+            outline: none;
+            border: none;
+            font-size: 1rem;
+            color: var(--white);
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+          
+          .dropbtn:hover {
+            background-color: var(--primary-color-dark);
+          }
+          
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-left: 200px;
+        }
+
+        h2 {
+            margin-bottom: 0px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+ 
+  
