@@ -1,0 +1,27 @@
+.services {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.service {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.service img {
+    max-width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .service {
+        width: calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .service {
+        width: calc(100% - 20px);
+    }
+}

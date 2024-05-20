@@ -123,6 +123,16 @@ def about(request):
     return render(request,'aboutus.html')
 
 def hospreg(request):
+<<<<<<< HEAD
+        return render(request,'hospregister.html')
+
+
+def services(request):
+        return render(request,'services.html')
+
+
+    
+=======
     return render(request,'hospregister.html')
 
 def doclist(request):
@@ -135,3 +145,4 @@ def doclist(request):
 
 def hosdetail(request):
     return render(request,'hosdetail.html')
+>>>>>>> dc3e0b2fcafc81911582e21bf6ca7b2700f59f68

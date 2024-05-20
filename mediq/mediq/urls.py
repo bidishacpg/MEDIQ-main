@@ -29,6 +29,15 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
+<<<<<<< HEAD
+    path('doclogin/', views.doclogin, name="login"),
+    path('docreg/',views.docreg, name="docreg"),
+    path('patreg/',views.patreg, name="patreg"),
+    path('book/',views.book, name="book"),
+    path('hospregister/',views.hospreg, name="hospregister"),
+    path('services/',views.services, name="services")
+    ]
+=======
     path('doclogin/', views.doclogin, name="doclogin"),
     path('docreg/',views.docreg, name="docreg"),
     path('patreg/',views.patreg, name="patreg"),
@@ -41,3 +50,4 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> dc3e0b2fcafc81911582e21bf6ca7b2700f59f68
