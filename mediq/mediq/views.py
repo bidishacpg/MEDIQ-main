@@ -123,19 +123,11 @@ def about(request):
     return render(request,'aboutus.html')
 
 def hospreg(request):
-<<<<<<< HEAD
     return render(request,'hospregister.html')
 
 
 def services(request):
     return render(request,'services.html')
-=======
-        return render(request,'hospregister.html')
-
-
-def services(request):
-        return render(request,'services.html')
->>>>>>> d2e85609004767b658755b5f398655d71eeb6b83
 
 def doclist(request):
     doclist=Docreg.objects.all()
@@ -148,8 +140,3 @@ def doclist(request):
 def hosdetail(request):
     return render(request,'hosdetail.html')
 
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> d2e85609004767b658755b5f398655d71eeb6b83
