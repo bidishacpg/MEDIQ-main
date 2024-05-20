@@ -26,7 +26,7 @@
         <h2>Patient Signup</h2>
         <div class="form-wrapper">
             <div class="form-left">
-        <form id="signupForm" action="{% url 'patreg' %}" method="post">
+        <form id="signupForm" action="{% url 'patreg' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %} 
             <div class="form-group">
                 <label for="first_name">First Name:</label>

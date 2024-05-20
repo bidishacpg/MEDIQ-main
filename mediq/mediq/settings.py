@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'patientreg',
     'docreg',
-    'Book'
+    'Book',
+    'hospreg'
 ]
 
 MIDDLEWARE = [

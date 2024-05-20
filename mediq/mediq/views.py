@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import check_password
 from Book.models import Book
 from patientreg.models import Patientreg
 from docreg.models import Docreg
+from hospreg.models import Hospreg
+
 
 def home(request):
     return render(request,"index.html")
@@ -112,15 +114,43 @@ def patreg(request):
       address =request.POST.get('address')
       message =request.POST.get('message')
       phone =request.POST.get('phone')
-      photo =request.POST.get('photo')
+      photo = request.FILES.get('photo') 
       
 
       en= Patientreg(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, password=password , address=address,photo=photo )
       en.save()
     return render(request,"patregister.html")
-def hospreg(request):
-    return render(request,'hospregister.html')
 
+
+def hospreg(request):
+   
+    if request.method == "POST":
+        hospital_name = request.POST.get('hospital_name')
+        hospital_type = request.POST.get('hospital_type')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        license = request.POST.get('license')
+        city = request.POST.get('city')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        photo = request.FILES.get('photo') 
+
+        en = Hospreg(
+            hospital_name=hospital_name,
+            hospital_type=hospital_type,
+            license=license,
+            email=email,
+            phone=phone,
+            city=city,
+            password=password,
+            confirm_password=confirm_password,
+            address=address,
+            photo=photo
+        )
+        en.save()
+
+    return render(request, 'hospregister.html')
 
 def hosdetails(request):
     return render(request,"hosdetails.html")
