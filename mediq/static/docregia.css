@@ -1,0 +1,213 @@
+:root {
+    --primary-color: #1B3C73;
+    --primary-color-dark: #40679E;
+    --text-dark: #111827;
+    --text-light: #6b7280;
+    --white: #ffffff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: url(static/img/doco.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+}
+
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--white);
+}
+
+fieldset {
+    margin-bottom: 20px;
+    border: none;
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    background-color: #feffff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-left,
+.form-right {
+    flex: 1;
+    padding: 0 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group small.error-message {
+    color: red;
+    display: none;
+}
+
+button.btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button.btn:hover {
+    background-color: var(--primary-color-dark);
+}
+
+legend {
+    font-weight: bold;
+}
+
+/* Adjusting the width and display for gender and date of birth labels */
+label[for="gender"],
+label[for="photo"] {
+    display: inline-block;
+    width: 70px;
+    margin-bottom: 10px;
+}
+
+label[for="dob"] {
+    display: inline-block;
+    width: 70px;
+    margin-bottom: 20px;
+}
+
+/* Styling input fields */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea,
+select,
+input[type="number"],
+input[type="date"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Styling submit button */
+input[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Hover effect for submit button */
+input[type="submit"]:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Styling availability section */
+/* Responsive styling for form */
+@media screen and (max-width: 600px) {
+    .form-wrapper {
+        flex-direction: column;
+    }
+    .form-left, .form-center, .form-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .form-group label {
+        width: 100px;
+        margin-right: 10px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        flex: 1;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .form-group span {
+        margin: 0 10px;
+    }
+    .error-message {
+        color: red;
+        font-size: 0.8em;
+        margin-left: 10px;
+    }
+    fieldset {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    legend {
+        padding: 0 10px;
+        font-weight: bold;
+    }
+
+input[type="time"] {
+    padding: 10x;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+span {
+    margin: 0 10px;
+}
+}
