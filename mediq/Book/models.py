@@ -1,13 +1,12 @@
 from django.db import models
 from tinymce.models import HTMLField
-class Patientreg(models.Model):
+class Book(models.Model):
     first_name=models.CharField(max_length=50)
     last_name=models.CharField(max_length=50)
     email=models.CharField(max_length=50)
     age=models.CharField(max_length=50)
-    password=models.CharField(max_length=50)
     gender=models.CharField(max_length=50)
-    address=models.CharField(max_length=50)
+    hospital=models.CharField(max_length=50)
+    doctor=models.CharField(max_length=50)
     message=models.TextField()
     phone=models.CharField(max_length=50)
-    photo = models.ImageField(upload_to='patient/',max_length=250,null=True,default=None)
