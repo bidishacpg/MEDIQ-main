@@ -34,5 +34,7 @@ urlpatterns = [
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister"),
-    path('services/',views.services, name="services")
+    path('services/',views.services, name="services"),
+    path('doclist/',views.doclist, name="doclist"),
+    path('hosdetail/',views.hosdetail, name="hosdetail")
     ]

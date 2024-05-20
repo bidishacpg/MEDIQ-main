@@ -129,5 +129,16 @@ def hospreg(request):
 def services(request):
         return render(request,'services.html')
 
+def doclist(request):
+    doclist=Docreg.objects.all()
+
+    dat={
+        'doclist':doclist
+    }
+    return render(request,"doclist.html",dat)
+
+def hosdetail(request):
+    return render(request,'hosdetail.html')
+
 
     
