@@ -117,7 +117,6 @@ def patreg(request):
 
       en= Patientreg(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, password=password , address=address,photo=photo )
       en.save()
-<<<<<<< HEAD
     return render(request,"patregister.html"),
 def hospreg(request):
     return render(request,'hospregister.html'),
@@ -132,28 +131,4 @@ def aboutus(request):
     return render(request,"aboutus.html")
 
 
-=======
-    return render(request,"patregister.html")
-
-def about(request):
-    return render(request,'aboutus.html')
-
-def hospreg(request):
-    return render(request,'hospregister.html')
-
-
-def services(request):
-    return render(request,'services.html')
-
-def doclist(request):
-    doclist=Docreg.objects.all()
-
-    dat={
-        'doclist':doclist
-    }
-    return render(request,"doclist.html",dat)
-
-def hosdetail(request):
-    return render(request,'hosdetail.html')
->>>>>>> 757396d0c3b1c1172a56bfbfdc9039e924e6b05b
 
