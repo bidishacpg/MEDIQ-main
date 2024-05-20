@@ -4,6 +4,7 @@ from django.shortcuts import render,redirect
 #from django.core.mail import send_mail,EmailMultiAlternatives
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import check_password
+from Book.models import Book
 from patientreg.models import Patientreg
 from docreg.models import Docreg
 
@@ -11,7 +12,19 @@ def home(request):
     return render(request,"index.html")
 
 def book(request):
-    return render(request,'appoint.html')
+     if request.method=="POST":
+      first_name =request.POST.get('first_name')
+      last_name =request.POST.get('last_name')
+      age =request.POST.get('age')
+      email=request.POST.get('email')
+      gender =request.POST.get('gender')
+      hospital =request.POST.get('hospital')
+      doctor =request.POST.get('doctor')
+      message =request.POST.get('message')
+      phone =request.POST.get('phone')
+      en= Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital , doctor=doctor )
+      en.save()
+     return render(request,'appoint.html')
 
 def docreg(request):
     if request.method == "POST":
@@ -95,13 +108,14 @@ def patreg(request):
       age =request.POST.get('age')
       email=request.POST.get('email')
       gender =request.POST.get('gender')
-      hospital =request.POST.get('hospital')
-      doctor =request.POST.get('doctor')
+      password =request.POST.get('password')
+      address =request.POST.get('address')
       message =request.POST.get('message')
       phone =request.POST.get('phone')
+      photo =request.POST.get('photo')
       
 
-      en= Patientreg(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital , doctor=doctor )
+      en= Patientreg(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, password=password , address=address,photo=photo )
       en.save()
     return render(request,"patregister.html")
 
@@ -109,11 +123,19 @@ def about(request):
     return render(request,'aboutus.html')
 
 def hospreg(request):
+<<<<<<< HEAD
     return render(request,'hospregister.html')
 
 
 def services(request):
     return render(request,'services.html')
+=======
+        return render(request,'hospregister.html')
+
+
+def services(request):
+        return render(request,'services.html')
+>>>>>>> d2e85609004767b658755b5f398655d71eeb6b83
 
 def doclist(request):
     doclist=Docreg.objects.all()
@@ -126,3 +148,8 @@ def doclist(request):
 def hosdetail(request):
     return render(request,'hosdetail.html')
 
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> d2e85609004767b658755b5f398655d71eeb6b83

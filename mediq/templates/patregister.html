@@ -45,6 +45,11 @@
                 <input type="email" id="email" name="email" required>
                 <small class="error-message" id="emailError"></small>
             </div>
+            <div class="form-group">
+                <label for="age">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <small class="error-message" id="PasswordError"></small>
+            </div>
 
             <div class="form-group">
                 <label for="age">Age:</label>
@@ -52,38 +57,22 @@
                 <small class="error-message" id="ageError"></small>
             </div>
 
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-                <small class="error-message" id="genderError"></small>
-            </div>
         </div>
            <div class="form-right">
             <div class="form-group">
-                <label for="hospital">Hospital:</label>
-                <select id="hospital" name="hospital" required>
-                    <option value="">Select Hospital</option>
-                    <option value="hospital1">Hospital 1</option>
-                    <option value="hospital2">Hospital 2</option>
-                    <option value="hospital3">Hospital 3</option>
-                </select>
-                <small class="error-message" id="hospitalError"></small>
-            </div>
-
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <small class="error-message" id="genderError"></small>
+        </div>
             <div class="form-group">
-                <label for="doctor">Doctor:</label>
-                <select id="doctor" name="doctor" required>
-                    <option value="">Select Doctor</option>
-                    <option value="doctor1">Doctor 1</option>
-                    <option value="doctor2">Doctor 2</option>
-                    <option value="doctor3">Doctor 3</option>
-                </select>
-                <small class="error-message" id="doctorError"></small>
+                <label for="address">Address:</label>
+                <input type="address" id="address" name="address" required>
+                <small class="error-message" id="addressError"></small>
             </div>
 
             <div class="form-group">
@@ -97,7 +86,10 @@
                 <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
                 <small class="error-message" id="phoneError"></small>
             </div>
-
+            <div class="form-group">
+            <label for="photo">Profile:</label>
+                            <input type="file" id="photo" name="photo" accept="image/*" required><br>
+            </div>
             <button type="submit" class="btn">Sign Up</button>
         </form>
     </div>
@@ -111,9 +103,9 @@
         const lastNameInput = document.getElementById('last_name');
         const emailInput = document.getElementById('email');
         const ageInput = document.getElementById('age');
+        const passwordInput = document.getElementById('password');
+        const address = document.getElementById('address');
         const genderInput = document.getElementById('gender');
-        const hospitalInput = document.getElementById('hospital');
-        const doctorInput = document.getElementById('doctor');
         const messageInput = document.getElementById('message');
         const phoneInput = document.getElementById('phone');
     
@@ -123,8 +115,8 @@
         const emailError = document.getElementById('emailError');
         const ageError = document.getElementById('ageError');
         const genderError = document.getElementById('genderError');
-        const hospitalError = document.getElementById('hospitalError');
-        const doctorError = document.getElementById('doctorError');
+        const password = document.getElementById('passwordError');
+        const addressError = document.getElementById('addressError');
         const messageError = document.getElementById('messageError');
         const phoneError = document.getElementById('phoneError');
     

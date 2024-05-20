@@ -35,6 +35,7 @@ urlpatterns = [
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister"),
     path('services/',views.services, name="services"),
+<<<<<<< HEAD
     path('doclogin/', views.doclogin, name="doclogin"),
     path('docreg/',views.docreg, name="docreg"),
     path('patreg/',views.patreg, name="patreg"),
@@ -44,8 +45,16 @@ urlpatterns = [
     path('hosdetail/',views.hosdetail, name="hosdetail"),
     path('about/',views.about, name="about"),
     path('services/',views.services,name="services")
+=======
+    path('doclist/',views.doclist, name="doclist"),
+    path('hosdetail/',views.hosdetail, name="hosdetail")
+    ]
+>>>>>>> d2e85609004767b658755b5f398655d71eeb6b83
 
-]
 if settings.DEBUG:
+<<<<<<< HEAD
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+=======
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> d2e85609004767b658755b5f398655d71eeb6b83
