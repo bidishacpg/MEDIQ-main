@@ -34,16 +34,10 @@ urlpatterns = [
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister"),
-    path('services/',views.services, name="services"),
-    path('doclogin/', views.doclogin, name="doclogin"),
-    path('docreg/',views.docreg, name="docreg"),
-    path('patreg/',views.patreg, name="patreg"),
-    path('book/',views.book, name="book"),
-    path('hospreg/',views.hospreg, name="hospreg"),
-    path('doclist/',views.doclist, name="doclist"),
-    path('hosdetail/',views.hosdetail, name="hosdetail"),
-    path('about/',views.about, name="about"),
-    path('services/',views.services,name="services")
+    path('hosdetails/',views.hosdetails, name="hosdetails"),
+    path('contact/',views.contact, name="contact"),
+    path('aboutus/',views.aboutus, name="aboutus"),
+    
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
