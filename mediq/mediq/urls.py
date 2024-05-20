@@ -37,6 +37,7 @@ urlpatterns = [
     path('hosdetails/',views.hosdetails, name="hosdetails"),
     path('contact/',views.contact, name="contact"),
     path('aboutus/',views.aboutus, name="aboutus"),
+    path('services/',views.services,name="services")
     
 ]
 if settings.DEBUG:
