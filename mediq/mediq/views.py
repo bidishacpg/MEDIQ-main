@@ -82,6 +82,14 @@ def docreg(request):
 
     return render(request, "docregister.html")
 
+def doclist(request):
+    doclist=Docreg.objects.all()
+
+    dat={
+        'doclist':doclist
+    }
+    return render(request,"doclist.html",dat)
+
 def doclogin(request):
      
      if request.method == "POST":
