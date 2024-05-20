@@ -38,3 +38,6 @@ urlpatterns = [
     path('doclist/',views.doclist, name="doclist"),
     path('hosdetail/',views.hosdetail, name="hosdetail")
     ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
