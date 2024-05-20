@@ -160,8 +160,16 @@ def hospreg(request):
 
     return render(request, 'hospregister.html')
 
-def hosdetails(request):
-    return render(request,"hosdetails.html")
+def hospage(request):
+    return render(request,"hospage.html")
+ 
+def hosplist(request):
+    hosplist=Hospreg.objects.all()
+
+    dat={
+        'hosplist':hosplist
+    }
+    return render(request,"hosplist.html",dat)
 
 def contact(request):
     return render(request,"contact.html")

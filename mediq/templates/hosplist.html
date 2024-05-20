@@ -7,7 +7,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
       rel="stylesheet" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="/static/hospdetail.css">
+    <link rel="stylesheet" href="/static/hosplist.css">
     <link rel="stylesheet" href="/static/indexx.css">
 
     <title> MEDIQUICK</title>
@@ -36,52 +36,18 @@
     <h1>Book Appointment at hospital of your choice</h1>
 
     <div class="hospital-card">
-        <img src="/static/img/bharatpurhosp.jpg" alt="Bharatpur Hospital">
+      {% for a in hosplist %}
+    {% if a.photo %} 
+        <img src="/hosp/{{a.photo}}" alt="Bharatpur Hospital">
+        {%endif%}
         <div class="hospital-info">
-            <h2>Bharatpur Hospital</h2>
-            <p>Location: Bharatpur, Chitwan</p>
+            <h2>{{a.hospital_name}}</h2>
+            <p>{{a.address}},{{a.city}}</p>
         </div>
         <div class="button-container">
             <a href="viewmore-hospital.html?hospital=bharatpur-Hospital">ViewMore</a>
         </div>
     </div>
-
-    <div class="hospital-card">
-        <img src="/static/img/B&B.jpg" alt="B&B">
-        <div class="hospital-info">
-            <h2>B&B hospital</h2>
-            <p>Location: Pokhara, Nepal</p>
-        </div>
-        <div class="button-container">
-            <a href="viewmore-hospital.html?hospital=B&B">ViewMore</a>
-        </div>
-    </div>
-
-    <div class="hospital-card">
-        <img src="/static/img/CMC.jpg" alt="Chitwan Medical Science(CMC)">
-        <div class="hospital-info">
-            <h2>Chitwan Medical Science(CMC)</h2>
-            <p>Location: Madi, Chitwan</p>
-        </div>
-        <div class="button-container">
-            <a href="viewmore-hospital.html?hospital=cmc">ViewMore</a>
-        </div>
-        
-    </div>
-    <div class="hospital-card">
-        <img src="/static/img/CMC.jpg" alt="Chitwan Medical Science(CMC)">
-        <div class="hospital-info">
-            <h2>Chitwan Medical Science(CMC)</h2>
-            <p>Location: Madi, Chitwan</p>
-        </div>
-        <div class="button-container">
-            <a href="viewmore-hospital.html?hospital=cmc">ViewMore</a>
-        </div>
-        
-    </div>
-
+    {% endfor%}
 </body>
-<div class="button-container">
-        <button class="btn btn-primary center">Load More</button>
-        </div>
 </html>

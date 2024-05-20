@@ -34,11 +34,12 @@ urlpatterns = [
     path('patreg/',views.patreg, name="patreg"),
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister"),
-    path('hosdetails/',views.hosdetails, name="hosdetails"),
+    path('hospage/',views.hospage, name="hospage"),
     path('contact/',views.contact, name="contact"),
     path('aboutus/',views.aboutus, name="aboutus"),
     path('services/',views.services,name="services"),
     path('doclist/',views.doclist,name="doclist"),
+    path('hosplist/',views.hosplist,name="hosplist")
 
     
 ]

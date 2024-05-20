@@ -36,6 +36,7 @@
         
 
         <h1>Hospital Registration Form</h1>
+        
         <form action="{% url 'hospregister' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %} 
             <label for="hospital_name">Hospital Name:</label>
