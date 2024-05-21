@@ -33,4 +33,6 @@ class Docreg(models.Model):
     saturday_end = models.TimeField(null=True, blank=True)
     sunday_start = models.TimeField(null=True, blank=True)
     sunday_end = models.TimeField(null=True, blank=True)
+
+
     

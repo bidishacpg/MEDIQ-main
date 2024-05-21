@@ -46,21 +46,26 @@ def docreg(request):
         workAddress = request.POST.get('workAddress')
         workContact = request.POST.get('workContact')
         workEmail = request.POST.get('workEmail')
-        photo = request.POST.get('photo')
-        monday_start = request.POST.get('monday_start')
-        monday_end = request.POST.get('monday_end')
-        tuesday_start = request.POST.get('tuesday_start')
-        tuesday_end = request.POST.get('tuesday_end')
-        wednesday_start = request.POST.get('wednesday_start')
-        wednesday_end = request.POST.get('wednesday_end')
-        thursday_start = request.POST.get('thursday_start')
-        thursday_end = request.POST.get('thursday_end')
-        friday_start = request.POST.get('friday_start')
-        friday_end = request.POST.get('friday_end')
-        saturday_start = request.POST.get('saturday_start')
-        saturday_end = request.POST.get('saturday_end')
-        sunday_start = request.POST.get('sunday_start')
-        sunday_end = request.POST.get('sunday_end')
+        photo = request.FILES.get('photo')
+
+        def get_time_field(field_name):
+            field_value = request.POST.get(field_name)
+            return field_value if field_value else None
+        
+        monday_start = get_time_field('monday_start')
+        monday_end = get_time_field('monday_end')
+        tuesday_start = get_time_field('tuesday_start')
+        tuesday_end = get_time_field('tuesday_end')
+        wednesday_start = get_time_field('wednesday_start')
+        wednesday_end = get_time_field('wednesday_end')
+        thursday_start = get_time_field('thursday_start')
+        thursday_end = get_time_field('thursday_end')
+        friday_start = get_time_field('friday_start')
+        friday_end = get_time_field('friday_end')
+        saturday_start = get_time_field('saturday_start')
+        saturday_end = get_time_field('saturday_end')
+        sunday_start = get_time_field('sunday_start')
+        sunday_end = get_time_field('sunday_end')
 
         en = Docreg(
             fullname=fullname, gender=gender, dob=dob, languages=languages, nationality=nationality,
@@ -92,15 +97,6 @@ def doclist(request):
 
 def doclogin(request):
      
-     if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        Docreg = authenticate(request, email=email, password=password)
-        if Docreg is not None:
-            login(request, Docreg)
-            return redirect("index.html")  # Redirect to dashboard or any other page
-        else:
-            return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
      return render(request, "doclogin.html")
 
 #subject='testing mail'
