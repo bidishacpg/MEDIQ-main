@@ -36,7 +36,7 @@
     {%for a in hosplist %}
     {% if a.photo %} 
     <div class="hospital-card">
-        <img src="/hosp/{{ a.photo.url }}" alt="Dr. Nikita Laudari" >
+        <img src="{{ a.photo.url }}" alt="Dr. Nikita Laudari" >
         {%endif%}
         <div class="hospital-info">
             <h2>{{a.hospital_name}}Hospital</h2>
