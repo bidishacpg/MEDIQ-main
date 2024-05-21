@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import check_password
 from Book.models import Book
 from patientreg.models import Patientreg
 from docreg.models import Docreg
+from hospreg.models import Hospreg
+
 
 def home(request):
     return render(request,"index.html")
@@ -44,21 +46,26 @@ def docreg(request):
         workAddress = request.POST.get('workAddress')
         workContact = request.POST.get('workContact')
         workEmail = request.POST.get('workEmail')
-        photo = request.POST.get('photo')
-        monday_start = request.POST.get('monday_start')
-        monday_end = request.POST.get('monday_end')
-        tuesday_start = request.POST.get('tuesday_start')
-        tuesday_end = request.POST.get('tuesday_end')
-        wednesday_start = request.POST.get('wednesday_start')
-        wednesday_end = request.POST.get('wednesday_end')
-        thursday_start = request.POST.get('thursday_start')
-        thursday_end = request.POST.get('thursday_end')
-        friday_start = request.POST.get('friday_start')
-        friday_end = request.POST.get('friday_end')
-        saturday_start = request.POST.get('saturday_start')
-        saturday_end = request.POST.get('saturday_end')
-        sunday_start = request.POST.get('sunday_start')
-        sunday_end = request.POST.get('sunday_end')
+        photo = request.FILES.get('photo')
+
+        def get_time_field(field_name):
+            field_value = request.POST.get(field_name)
+            return field_value if field_value else None
+        
+        monday_start = get_time_field('monday_start')
+        monday_end = get_time_field('monday_end')
+        tuesday_start = get_time_field('tuesday_start')
+        tuesday_end = get_time_field('tuesday_end')
+        wednesday_start = get_time_field('wednesday_start')
+        wednesday_end = get_time_field('wednesday_end')
+        thursday_start = get_time_field('thursday_start')
+        thursday_end = get_time_field('thursday_end')
+        friday_start = get_time_field('friday_start')
+        friday_end = get_time_field('friday_end')
+        saturday_start = get_time_field('saturday_start')
+        saturday_end = get_time_field('saturday_end')
+        sunday_start = get_time_field('sunday_start')
+        sunday_end = get_time_field('sunday_end')
 
         en = Docreg(
             fullname=fullname, gender=gender, dob=dob, languages=languages, nationality=nationality,
@@ -80,17 +87,16 @@ def docreg(request):
 
     return render(request, "docregister.html")
 
+def doclist(request):
+    doclist=Docreg.objects.all()
+
+    dat={
+        'doclist':doclist
+    }
+    return render(request,"doclist.html",dat)
+
 def doclogin(request):
      
-     if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        Docreg = authenticate(request, email=email, password=password)
-        if Docreg is not None:
-            login(request, Docreg)
-            return redirect("index.html")  # Redirect to dashboard or any other page
-        else:
-            return render(request, "doclogin.html", {'error': 'Invalid credentials'}) 
      return render(request, "doclogin.html")
 
 #subject='testing mail'
@@ -112,31 +118,62 @@ def patreg(request):
       address =request.POST.get('address')
       message =request.POST.get('message')
       phone =request.POST.get('phone')
-      photo =request.POST.get('photo')
+      photo = request.FILES.get('photo') 
       
 
       en= Patientreg(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, password=password , address=address,photo=photo )
       en.save()
     return render(request,"patregister.html")
 
-def about(request):
-    return render(request,'aboutus.html')
 
 def hospreg(request):
-    return render(request,'hospregister.html')
+   
+    if request.method == "POST":
+        hospital_name = request.POST.get('hospital_name')
+        hospital_type = request.POST.get('hospital_type')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        license = request.POST.get('license')
+        city = request.POST.get('city')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        photo = request.FILES.get('photo') 
 
+        en = Hospreg(
+            hospital_name=hospital_name,
+            hospital_type=hospital_type,
+            license=license,
+            email=email,
+            phone=phone,
+            city=city,
+            password=password,
+            confirm_password=confirm_password,
+            address=address,
+            photo=photo
+        )
+        en.save()
 
-def services(request):
-    return render(request,'services.html')
+    return render(request, 'hospregister.html')
 
-def doclist(request):
-    doclist=Docreg.objects.all()
+def hospage(request):
+    return render(request,"hospage.html")
+ 
+def hosplist(request):
+    hosplist=Hospreg.objects.all()
 
     dat={
-        'doclist':doclist
+        'hosplist':hosplist
     }
-    return render(request,"doclist.html",dat)
+    return render(request,"hosplist.html",dat)
 
-def hosdetail(request):
-    return render(request,'hosdetail.html')
+def contact(request):
+    return render(request,"contact.html")
+def aboutus(request):
+    return render(request,"aboutus.html")
+
+def services(request):
+    return render(request,"services.html")
+
+
 
