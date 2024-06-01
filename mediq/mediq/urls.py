@@ -33,6 +33,7 @@ urlpatterns = [
     path('docreg/',views.docreg, name="docreg"),
     path('hosplogin/',views.hosplogin, name="hosplogin"),
     path('patreg/',views.patreg, name="patreg"),
+    path('patlogin/',views.patlogin, name="patlogin"),
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister"),
     path('hospage/',views.hospage, name="hospage"),

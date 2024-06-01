@@ -43,7 +43,9 @@
             <img src="/static/img/insta.png">
             <img src="/static/img/goog.png">
 </div>
-
+{% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
 <form action="{% url 'doclogin' %}"method="post" name="form1" class="input" onsubmit="return validateForm()">
   {% csrf_token %}
     Email<input type="text" class="input-field" name="email"placeholder="Enter your doctoremail" >
