@@ -87,6 +87,13 @@ def patreg(request):
         form = patregisterr()
         return render(request, 'patregister.html', {'form': form})
 
+def doctorprofile(request,id):
+    # Fetch the specific doctor from the database using the primary key (doc_id)
+    doclist = Docreg.objects.get(id=id)
+    data={
+        'doclist':doclist
+    }
+    return render(request, 'doctorprofile.html',data)
 
 def patlogin(request):
     error_message = None

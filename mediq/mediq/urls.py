@@ -42,7 +42,8 @@ urlpatterns = [
     path('services/',views.services,name="services"),
     path('doclist/',views.doclist,name="doclist"),
     path('hosplist/',views.hosplist,name="hosplist"),
-    path('ambulance/',views.ambulance,name="ambulance")
+    path('ambulance/',views.ambulance,name="ambulance"),
+    path('doctorprofile/<id>',views.doctorprofile,name="doctorprofile")
 
 
     

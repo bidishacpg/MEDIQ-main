@@ -1,6 +1,7 @@
 from django.db import models
 from tinymce.models import HTMLField
 class Hospreg(models.Model):
+    id = models.AutoField(primary_key=True)
     hospital_name=models.CharField(max_length=50)
     hospital_type=models.CharField(max_length=50)
     email=models.CharField(max_length=50)

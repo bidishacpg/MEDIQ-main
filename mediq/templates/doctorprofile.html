@@ -1,0 +1,30 @@
+<!-- doctor_profile.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ doclist.fullname }} Profile</title>
+    <!-- Add CSS and other resources if needed -->
+</head>
+<body>
+    <h1>{{ doclist.fullname }}'s Profile</h1>
+    <div class="doctor-info">
+        <p>Gender: {{ doclist.gender }}</p>
+        <p>Date of Birth: {{ doclist.dob }}</p>
+        <p>Languages: {{ doclist.languages }}</p>
+        <p>Nationality: {{ doclist.nationality }}</p>
+        <!-- Add more profile details as needed -->
+    </div>
+    <div class="work-info">
+        <h2>Work Information</h2>
+        <p>Specialization: {{ doclist.specialization }}</p>
+        <p>Experience: {{ doclist.experience }}</p>
+        <p>Workplace: {{ doclist.workplace }}</p>
+        <p>Work Address: {{ doclist.workAddress }}</p>
+        <!-- Add more work details as needed -->
+    </div>
+    <!-- Add more sections as needed -->
+</body>
+</html>
