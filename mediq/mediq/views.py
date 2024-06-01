@@ -11,7 +11,12 @@ from hospreg.models import Hospreg
 
 
 def home(request):
-    return render(request,"index.html")
+    hosplist=Hospreg.objects.all()
+
+    dat={
+        'hosplist':hosplist
+    }
+    return render(request,"index.html",dat)
 
 def book(request):
      if request.method=="POST":
