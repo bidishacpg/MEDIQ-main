@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 #from django.core.mail import send_mail,EmailMultiAlternatives
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from Book.models import Book
 from patientreg.models import Patientreg
@@ -160,6 +161,9 @@ def hospreg(request):
         en.save()
 
     return render(request, 'hospregister.html')
+
+def hosplogin(request):
+    return render(request,"hosplogin.html")
 
 def hospage(request):
     return render(request,"hospage.html")
