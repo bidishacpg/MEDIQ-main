@@ -44,10 +44,13 @@
             <img src="/static/img/insta.png">
             <img src="/static/img/goog.png">
 </div>
-
-<form action="doclogin.html" method="post" name="form1" class="input" onsubmit="return validateForm()">
-
-    <input type="text" class="input-field" name="hospitalemail"placeholder="Enter your hospitalemail" >
+{% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+<form action="{% url 'hosplogin' %}" method="post" name="form1" class="input" onsubmit="return validateForm()">
+  {% csrf_token %}
+  
+    <input type="text" class="input-field" name="email"placeholder="Enter your hospitalemail" >
     <input type="password" class="input-field" name="password" placeholder="Enter your Password" >
     <input type="checkbox" class="checkbox"><span>Remember Password </span>
     <button type="submit" class="submit-btn" name="Login">Login</button>

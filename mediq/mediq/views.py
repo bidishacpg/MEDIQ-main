@@ -1,10 +1,7 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-#from django.core.mail import send_mail,EmailMultiAlternatives
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import check_password
+from hospreg.forms import hospregisterr, hosploginn
 from Book.models import Book
 from patientreg.models import Patientreg
 from docreg.models import Docreg
@@ -134,36 +131,31 @@ def patreg(request):
 
 def hospreg(request):
    
-    if request.method == "POST":
-        hospital_name = request.POST.get('hospital_name')
-        hospital_type = request.POST.get('hospital_type')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        license = request.POST.get('license')
-        city = request.POST.get('city')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
-        photo = request.FILES.get('photo') 
+    if request.method == 'POST':
+        form = hospregisterr(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = hospregisterr()
+    return render(request, 'hospregister.html', {'form': form})
 
-        en = Hospreg(
-            hospital_name=hospital_name,
-            hospital_type=hospital_type,
-            license=license,
-            email=email,
-            phone=phone,
-            city=city,
-            password=password,
-            confirm_password=confirm_password,
-            address=address,
-            photo=photo
-        )
-        en.save()
-
-    return render(request, 'hospregister.html')
 
 def hosplogin(request):
-    return render(request,"hosplogin.html")
+    error_message = None
+    if request.method == 'POST':
+        form = hosploginn(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                hospreg = Hospreg.objects.get(email=email, password=password)
+                return redirect('aboutus')  # Redirect to a success page
+            except :
+                error_message = 'Invalid username or password'
+    else:
+        form = hosploginn()
+    return render(request, 'hosplogin.html', {'form': form, 'error_message': error_message})
 
 def hospage(request):
     return render(request,"hospage.html")

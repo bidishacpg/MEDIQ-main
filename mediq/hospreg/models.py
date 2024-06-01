@@ -11,3 +11,6 @@ class Hospreg(models.Model):
     password=models.CharField(max_length=50)
     confirm_password=models.CharField(max_length=50)
     photo = models.ImageField(upload_to='hosp/',null=True,default=None)
+
+    def __str__(self):
+        return self.hospital_name
