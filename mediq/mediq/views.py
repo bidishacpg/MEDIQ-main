@@ -135,6 +135,9 @@ def hosplogin(request):
 
 def hospage(request):
     return render(request,"hospage.html")
+
+def ambulance(request):
+    return render(request,"ambulance.html")
  
 def hosplist(request):
     hosplist=Hospreg.objects.all()
