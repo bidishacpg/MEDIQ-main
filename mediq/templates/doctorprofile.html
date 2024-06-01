@@ -1,30 +1,56 @@
-<!-- doctor_profile.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ doclist.fullname }} Profile</title>
-    <!-- Add CSS and other resources if needed -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/docprofile.css">
+    <title>Doctor Profile</title>
 </head>
 <body>
-    <h1>{{ doclist.fullname }}'s Profile</h1>
-    <div class="doctor-info">
-        <p>Gender: {{ doclist.gender }}</p>
-        <p>Date of Birth: {{ doclist.dob }}</p>
-        <p>Languages: {{ doclist.languages }}</p>
-        <p>Nationality: {{ doclist.nationality }}</p>
-        <!-- Add more profile details as needed -->
+    <div class="container">
+        <div class="profile-header">
+            <h1>{{ doclist.fullname }}'s Profile</h1>
+            <img src="/media/{{doclist.photo}}" alt="Doctor Profile Picture">
+        </div>
+        <div class="profile-details">
+            <h2>Personal Information</h2>
+            <ul>
+                <li><strong>Gender:</strong>{{doclist.gender}}</li>
+                <li><strong>Date of Birth:</strong>{{doclist.dob}}</li>
+                <li><strong>Languages Spoken:</strong>{{doclist.languages}}</li>
+                <li><strong>Nationality:</strong>{{doclist.nationality}}</li>
+                <li><strong>Contact Number:</strong>{{doclist.contactNumber}}</li>
+                <li><strong>Email Address:</strong>{{doclist.email}}</li>
+            </ul>
+        </div>
+        <div class="profile-details">
+            <h2>Doctor Availability</h2>
+            <ul>
+                <li><strong>Monday:</strong> {{doclist.monday_start}}to {{doclist.monday_end}}</li>
+                <li><strong>Tuesday:</strong> {{doclist.tuesday_start}}to {{doclist.tuesday_end}}</li>
+                <li><strong>Wednesday:</strong> {{doclist.wednesday_start}}to {{doclist.wednesday_end}}</li>
+                <li><strong>Thursday:</strong> {{doclist.thursday_start}}to {{doclist.thursday_end}}</li>
+                <li><strong>Friday:</strong> {{doclist.friday_start}}to {{doclist.friday_end}}</li>
+                <li><strong>Saturday:</strong> {{doclist.saturday_start}}to {{doclist.saturday_end}}</li>
+                <li><strong>Sunday:</strong> {{doclist.sunday_start}}to {{doclist.sunday_end}}</li>
+            </ul>
+        </div>
+        <div class="profile-details">
+            <h2>Professional Information</h2>
+            <ul>
+                <li><strong>Medical Degree:</strong> {{doclist.medicalDegree}}</li>
+                <li><strong>Medical License Number:</strong>{{doclist.licenseNumber}}</li>
+                <li><strong>Specialization:</strong> {{doclist.specialization}}</li>
+                <li><strong>Years of Experience:</strong> {{doclist.experience}}</li>
+                <li><strong>Current Workplace:</strong> {{doclist.workplace}}</li>
+                <li><strong>Work Address:</strong> {{doclist.workAddress}}</li>
+                <li><strong>Contact Number (Work):</strong> {{doclist.workContact}}</li>
+                <li><strong>Email Address (Work):</strong> {{doclist.workEmail}}</li>
+            </ul>
+        </div>
     </div>
-    <div class="work-info">
-        <h2>Work Information</h2>
-        <p>Specialization: {{ doclist.specialization }}</p>
-        <p>Experience: {{ doclist.experience }}</p>
-        <p>Workplace: {{ doclist.workplace }}</p>
-        <p>Work Address: {{ doclist.workAddress }}</p>
-        <!-- Add more work details as needed -->
-    </div>
-    <!-- Add more sections as needed -->
 </body>
 </html>
+
+

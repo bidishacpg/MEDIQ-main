@@ -95,6 +95,14 @@ def doctorprofile(request,id):
     }
     return render(request, 'doctorprofile.html',data)
 
+def hospage(request,id):
+    hosplist = Hospreg.objects.get(id=id)
+    data={
+        'hosplist':hosplist
+    }
+    return render(request, 'hospage.html',data)
+      # Assuming you have only one hospita
+
 def patlogin(request):
     error_message = None
     if request.method == 'POST':
@@ -140,8 +148,6 @@ def hosplogin(request):
         form = hosploginn()
     return render(request, 'hosplogin.html', {'form': form, 'error_message': error_message})
 
-def hospage(request):
-    return render(request,"hospage.html")
 
 def ambulance(request):
     return render(request,"ambulance.html")
