@@ -70,7 +70,7 @@ def doclogin(request):
             password = form.cleaned_data['password']
             try:
                 docreg = Docreg.objects.get(email=email, password=password)
-                return redirect('aboutus')  # Redirect to a success page
+                return redirect('dochome')  # Redirect to a success page
             except :
                 error_message = 'Invalid username or password'
      else:
@@ -130,7 +130,7 @@ def patlogin(request):
             password = form.cleaned_data['password']
             try:
                 patientreg = Patientreg.objects.get(email=email, password=password)
-                return redirect('aboutus')  # Redirect to a success page
+                return redirect('pathome')  # Redirect to a success page
             except :
                 error_message = 'Invalid username or password'
     else:
@@ -167,7 +167,7 @@ def hosplogin(request):
             password = form.cleaned_data['password']
             try:
                 hospreg = Hospreg.objects.get(email=email, password=password)
-                return redirect('aboutus')  # Redirect to a success page
+                return redirect('hosphome')  # Redirect to a success page
             except :
                 error_message = 'Invalid username or password'
     else:
@@ -193,6 +193,15 @@ def aboutus(request):
 
 def services(request):
     return render(request,"services.html")
+
+def pathome(request):
+    return render(request,"pathome.html")
+
+def dochome(request):
+    return render(request,"dochome.html")
+
+def hosphome(request):
+    return render(request,"hosphome.html")
 
 
 

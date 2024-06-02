@@ -42,6 +42,9 @@ urlpatterns = [
     path('doclist/',views.doclist,name="doclist"),
     path('hosplist/',views.hosplist,name="hosplist"),
     path('ambulance/',views.ambulance,name="ambulance"),
+    path('pathome/',views.pathome,name="pathome"),
+    path('dochome/',views.dochome,name="dochome"),
+    path('hosphome/',views.hosphome,name="hosphome"),
     path('doctorprofile/<id>',views.doctorprofile,name="doctorprofile"),
      path('hospage/<id>',views.hospage,name="hospage")
 
