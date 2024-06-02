@@ -35,10 +35,19 @@ def book(request):
 
 def docreg(request):
     if request.method == 'POST':
-        form = docregisterr(request.POST)
+        print("Received POST request")
+        print("POST data:", request.POST)
+        print("FILES data:", request.FILES)
+        form = docregisterr(request.POST, request.FILES) 
         if form.is_valid():
+            print("Form is valid")
             form.save()
-            return redirect('login')
+            return redirect('doclogin')
+        else:
+            # Print form errors to the console
+            print("Form is not valid")
+            print(form.errors)
+            return render(request, 'docregister.html', {'form': form})
     else:
         form = docregisterr()
     return render(request, 'docregister.html', {'form': form})
@@ -78,12 +87,21 @@ def doclogin(request):
 #msg.send()
 
 def patreg(request):
-   if request.method == 'POST':
-        form = patregisterr(request.POST)
+    if request.method == 'POST':
+        print("Received POST request")
+        print("POST data:", request.POST)
+        print("FILES data:", request.FILES)
+        form = patregisterr(request.POST, request.FILES)  # Including request.FILES for file uploads
         if form.is_valid():
+            print("Form is valid")
             form.save()
             return redirect('patlogin')
-   else:
+        else:
+            # Print form errors to the console
+            print("Form is not valid")
+            print(form.errors)
+            return render(request, 'patregister.html', {'form': form})
+    else:
         form = patregisterr()
         return render(request, 'patregister.html', {'form': form})
 
@@ -119,17 +137,25 @@ def patlogin(request):
         form = patloginn()
     return render(request, 'patlogin.html', {'form': form, 'error_message': error_message})
 
-
+    
 def hospreg(request):
-   
     if request.method == 'POST':
-        form = hospregisterr(request.POST)
+        print("Received POST request")
+        print("POST data:", request.POST)
+        print("FILES data:", request.FILES)
+        form = hospregisterr(request.POST, request.FILES)  # Including request.FILES for file uploads
         if form.is_valid():
+            print("Form is valid")
             form.save()
-            return redirect('login')
+            return redirect('hosplogin')
+        else:
+            # Print form errors to the console
+            print("Form is not valid")
+            print(form.errors)
+            return render(request, 'hospregister.html', {'form': form})
     else:
         form = hospregisterr()
-    return render(request, 'hospregister.html', {'form': form})
+        return render(request, 'hospregister.html', {'form': form})
 
 
 def hosplogin(request):
