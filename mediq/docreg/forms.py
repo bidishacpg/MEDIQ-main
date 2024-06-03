@@ -1,5 +1,6 @@
 from django import forms
 from docreg.models import Docreg
+from django.core.exceptions import ValidationError
 
 class docregisterr(forms.ModelForm):
     class Meta:
@@ -14,6 +15,11 @@ class docregisterr(forms.ModelForm):
             'password': forms.PasswordInput(),
         }
         
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if Docreg.objects.filter(email=email).exists():
+            raise ValidationError("This email address is already registered.")
+        return email
 
 class docloginn(forms.Form):
     email = forms.CharField(max_length=150)

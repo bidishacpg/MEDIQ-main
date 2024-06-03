@@ -63,6 +63,21 @@
                                 <input type="tel" id="contactNumber" name="contactNumber" required><br>
                                 <label for="email">Email Address:</label><br>
                                 <input type="email" id="email" name="email" required><br>
+                                {% if form.errors %}
+    <div class="errors">
+        <ul>
+            {% for field, errors in form.errors.items %}
+               {{ errors|striptags }}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <style>
+        .errors {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
                                 <label for="password">Password:</label><br>
                                 <input type="password" id="password" name="password" required><br>
                             </fieldset>
