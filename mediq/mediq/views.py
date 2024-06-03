@@ -72,7 +72,7 @@ def doclogin(request):
                 docreg = Docreg.objects.get(email=email, password=password)
                 return redirect('dochome')  # Redirect to a success page
             except :
-                error_message = 'Invalid username or password'
+                error_message = 'Invalid username or password(please provide unique email address)'
      else:
         form = docloginn()
      return render(request, 'doclogin.html', {'form': form, 'error_message': error_message})
