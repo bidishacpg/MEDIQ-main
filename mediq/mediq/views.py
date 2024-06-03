@@ -12,7 +12,10 @@ from hospreg.models import Hospreg
 
 def home(request):
     hosplist=Hospreg.objects.all()
-
+    if request.method=="GET":
+       jb =request.GET.get('hospname')
+    if jb !=None:
+       hosplist=Hospreg.objects.filter(hospital_name__icontains= jb)
     dat={
         'hosplist':hosplist
     }
