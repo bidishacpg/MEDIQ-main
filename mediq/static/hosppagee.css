@@ -65,7 +65,23 @@
       margin: 0 auto;
       padding: 0 20px; 
   }
-  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 30px; /* Add margin for separation */
+}
+
+.profile-header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+    border: 4px solid var(--primary-color);
+}
+
+.profile-details {
+    margin-top: 30px;
+}
+
   .card {
       background: var(--white);
       padding: 15px;
@@ -117,4 +133,5 @@
           margin: 10px 0;
       }
   }
+  
   
