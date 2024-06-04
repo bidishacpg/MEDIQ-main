@@ -50,10 +50,12 @@ def docreg(request):
             # Print form errors to the console
             print("Form is not valid")
             print(form.errors)
-            return render(request, 'docregister.html', {'form': form})
+            hospitals = Hospreg.objects.all()  
+            return render(request, 'docregister.html', {'form': form, 'hospitals': hospitals})
     else:
         form = docregisterr()
-    return render(request, 'docregister.html', {'form': form})
+        hospitals = Hospreg.objects.all()
+    return render(request, 'docregister.html', {'form': form, 'hospitals': hospitals})
 
 
 def doclist(request):

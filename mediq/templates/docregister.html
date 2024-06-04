@@ -8,7 +8,7 @@
       rel="stylesheet" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/static/docregia.css">
-    <link rel="stylesheet" href="/static/indexx.css">
+    <link rel="stylesheet" href="/static/indexxx.css">
 
     <title> MEDIQUICK</title>
   </head>
@@ -142,7 +142,11 @@
                             <label for="experience">Years of Experience:</label><br>
                             <input type="number" id="experience" name="experience" required><br>
                             <label for="workplace">Current Workplace:</label><br>
-                            <input type="text" id="workplace" name="workplace" required><br>
+              <select id="workplace" name="workplace" required>
+                <option value="" disabled selected>Select your workplace</option>
+                {% for hospital in hospitals %}
+                <option value="{{ hospital.id }}">{{ hospital.hospital_name }}</option>
+                {% endfor %}
                             <label for="workAddress">Work Address:</label><br>
                             <textarea id="workAddress" name="workAddress" rows="4" required></textarea><br>
                             <label for="workContact">Contact Number (Work):</label><br>
