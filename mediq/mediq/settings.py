@@ -132,3 +132,9 @@ STATICFILES_DIRS=[
 import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=537
+EMAIL_HOST_USER='chapagaibidisha@gmail.com'
+EMAIL_HOST_PASSWORD='tqcbjlmryqatkpnz'
+EMAIL_USE_TLS=True

@@ -1,6 +1,7 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from django.core.mail import send_mail
 from hospreg.forms import hospregisterr, hosploginn
 from docreg.forms import docregisterr, docloginn
 from patientreg.forms import patregisterr, patloginn
@@ -34,6 +35,13 @@ def book(request):
       phone =request.POST.get('phone')
       en= Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital , doctor=doctor )
       en.save()
+      send_mail(
+         'Booking Confirm',
+         'your booking for hospital is confirmed',
+         'chapagaibidisha@gmail.com',
+         ['bidishachapagai@gmail.com'],
+         fail_silently=False
+      )
      return render(request,'appoint.html')
 
 def docreg(request):
