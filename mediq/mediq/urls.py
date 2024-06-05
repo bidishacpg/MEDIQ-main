@@ -49,7 +49,9 @@ urlpatterns = [
      path('hosplogout/', views.hosplogout, name='hosplogout'),
      path('patlogout/', views.patlogout, name='patlogout'),
      path('doclogout/', views.doclogout, name='doclogout'),
-     path('hospage/<id>',views.hospage,name="hospage")
+     path('hospage/<id>',views.hospage,name="hospage"),
+     path('confirm_appointment/<int:booking_id>/', views.confirm_appointment, name='confirm_appointment'),
+    path('delete_appointment/<int:booking_id>/', views.delete_appointment, name='delete_appointment'),
 
 
     

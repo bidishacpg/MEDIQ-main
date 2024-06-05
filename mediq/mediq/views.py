@@ -12,6 +12,9 @@ from hospreg.models import Hospreg
 import logging
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -257,8 +260,30 @@ def pathome(request):
 def dochome(request):
     return render(request,"dochome.html")
 
+@login_required
 def hosphome(request):
-    return render(request,"hosphome.html")
+    # Retrieve hospital registration details from session
+    hospreg_id = request.session.get('hospreg_id')
+    
+    # Retrieve data relevant to the logged-in hospital
+    hosplist = Hospreg.objects.filter(id=hospreg_id)
+    bookings = Book.objects.filter(hospital__in=[hosp.hospital_name for hosp in hosplist])
+    doctors = Docreg.objects.filter(workplace__in=[hosp.hospital_name for hosp in hosplist])
+    # Pass the hospital data to the template for rendering
+    return render(request, 'hosphome.html', {'hosplist': hosplist, 'bookings': bookings,'doctors':doctors})
 
+def confirm_appointment(request, booking_id):
+    # Get the booking object
+    booking = get_object_or_404(Book, id=booking_id)
+    # Perform actions related to confirmation (e.g., send email)
+    # Assuming confirmation is successful, you can redirect to the same page or any other page
+    # For now, let's redirect to the same page
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+def delete_appointment(request, booking_id):
+    # Get the booking object
+    booking = get_object_or_404(Book, id=booking_id)
+    # Perform deletion
+    booking.delete()
+    # Redirect to the same page or any other page after deletion
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
