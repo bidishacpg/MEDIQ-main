@@ -9,6 +9,7 @@ from Book.models import Book
 from patientreg.models import Patientreg
 from docreg.models import Docreg
 from hospreg.models import Hospreg
+import logging
 
 
 def home(request):
@@ -21,6 +22,7 @@ def home(request):
         'hosplist':hosplist
     }
     return render(request,"index.html",dat)
+logger = logging.getLogger(__name__)
 
 def book(request):
      if request.method=="POST":
@@ -35,13 +37,17 @@ def book(request):
       phone =request.POST.get('phone')
       en= Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital , doctor=doctor )
       en.save()
-      send_mail(
+      try:
+          send_mail(
          'Booking Confirm',
          'your booking for hospital is confirmed',
          'chapagaibidisha@gmail.com',
-         ['bidishachapagai@gmail.com'],
+         [email],
          fail_silently=False
       )
+      except Exception as e:
+            print(f"Error sending email: {e}")
+
      return render(request,'appoint.html')
 
 def docreg(request):
