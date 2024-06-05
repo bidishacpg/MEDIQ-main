@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/indexxx.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title> MEDIQUICK</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">MEDIQUICK</div>
+        <ul class="nav__links">
+          <li class="link"><a href="">Home</a></li>
+          <li class="link"><a href="aboutus/">About Us</a></li>
+          <li class="link"><a href="/services">Services</a></li>
+          <li class="link"><a href="/ambulance">Ambulance</a></li>
+          <li class="link"><a href="/doclist">Doctors</a></li>
+          <li class="link"><a href="hosplist/">Hospitals</a></li>
+          <li class="link"><a href="contact/">Contact</a></li>
+          <li class="dropdown">
+            <button class="dropbtn">Login/Register</button>
+            <div class="dropdown-content">
+              <a href="patlogin/">Patient</a>
+              <a href="hosplogin/">Hospital</a>
+              <a href="doclogin/">Doctor</a>
+            </div>
+          </li>
+     <!--<button class="btn">Login/Register</button> -->
+      </nav>
+      <header class="header">
+        <div class="content">
+          <h1><span>Get Quick</span><br />Appointment Services</h1>
+          <p>
+            In today's fast-paced world, access to prompt and efficient medical
+            services is of paramount importance. When faced with a medical
+            emergency or seeking immediate medical attention, the ability to
+            receive quick medical services can significantly impact the outcome
+            of a situation.
+          </p>
+          <button class="btn"><a href="/book" class="no-underline">Book Appointment</a></button>
+        </div>
+        <div class="image">
+          <span class="image__bg"></span>
+          <img src="/static/img/cutu.jpg" alt="header image" />
+          </div>
+        </div>
+      </header>
+      
+      <div class="info-bar">
+        <div class="info-item">
+            <h3>100+</h3>
+            <p>Hospitals</p>
+        </div>
+        <div class="info-item">
+            <h3>150+</h3>
+            <p>Doctors</p>
+        </div>
+        <div class="info-item">
+            <h3>500+</h3>
+            <p>Patients</p>
+        </div>
+    </div>
+
+
+      <div class="search">
+        <form method="get">
+            <input type="text" name="hospname" placeholder="Search for hospitals...">
+            <input type="submit" class="search-btn" value="Search">
+        </form>
+      </div>
+      <div class="hospitals">
+        {%for a in hosplist %}
+        <div class="hospital">
+          {% if a.photo %} 
+          <img src="{{ a.photo.url }}" alt="">
+          {%endif%}
+          <h3>{{a.hospital_name}}Hospital</h3>
+          <p>Address:{{a.address}},{{a.city}}</p>
+          <button class="btn">View Details</button>
+        </div>
+        {%empty%}
+    No Hospitals 
+        {% endfor %}
+      </div>
+       <!--- <div class="hospital">
+          <img src="/static/img/Bir.png" alt="Hospital 2">
+          <h3>Hospital Name</h3>
+          <p>Location: ABC</p>
+          <button class="btn">View Details</button>
+        </div>
+        <div class="hospital">
+          <img src="/static/img/Bir.png" alt="Hospital 2">
+          <h3>Hospital Name</h3>
+          <p>Location: ABC</p>
+          <button class="btn">View Details</button>
+        </div>
+        <div class="hospital">
+          <img src="/static/img/Bir.png" alt="Hospital 2">
+          <h3>Hospital Name</h3>
+          <p>Location: ABC</p>
+          <button class="btn">View Details</button>
+        </div>
+        <div class="hospital">
+          <img src="/static/img/Bir.png" alt="Hospital 2">
+          <h3>Hospital Name</h3>
+          <p>Location: ABC</p>
+          <button class="btn">View Details</button>
+        </div>
+        <div class="hospital">
+          <img src="/static/img/Bir.png" alt="Hospital 2">
+          <h3>Hospital Name</h3>
+          <p>Location: ABC</p>
+          <button class="btn">View Details</button>
+        </div>
+        <div class="hospital">
+          <img src="/static/img/Bir.png" alt="Hospital 2">
+          <h3>Hospital Name</h3>
+          <p>Location: ABC</p>
+          <button class="btn">View Details</button>
+        </div>
+    </div>-->
+    {% include "footer.html" %}
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  </body>
+</html>
+
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  --primary-color: #1B3C73;
+  --primary-color-dark: #40679E;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --white: #ffffff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: inline-block;
+}
+.no-underline {
+  text-decoration: none; 
+  color: white;
+  display: block;
+  height: 100%; 
+  width: 100%; 
+  text-align: center; 
+  line-height: inherit; 
+}
+
+
+.btn:hover {
+  background-color: var(--primary-color-dark);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav__logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+.link a {
+  text-decoration: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link a:hover {
+  color: var(--primary-color);
+}
+
+.header {
+  padding: 0 1rem;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: var(--text-dark);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Adjustments to match the existing theme */
+  .dropbtn {
+    padding: 1rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .dropbtn:hover {
+    background-color: var(--primary-color-dark);
+  }
+  
+
+.content h1 {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.content h1 span {
+  font-weight: 400;
+}
+
+.content p {
+  margin-bottom: 2rem;
+  color: var(--text-light);
+  line-height: 1.75rem;
+}
+
+.image {
+  position: relative;
+  text-align: center;
+  isolation: isolate;
+}
+
+.image__bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 450px;
+  width: 450px;
+  background-color: var(--primary-color);
+  border-radius: 100%;
+  z-index: -1;
+}
+
+.image img {
+  width: 100%;
+  max-width: 475px;
+}
+
+.image__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.image__content__1 {
+  transform: translate(calc(-50% - 12rem), calc(-50% - 8rem));
+}
+
+.image__content__1 span {
+  padding: 10px 12px;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  background-color: #defcf4;
+  border-radius: 100%;
+}
+
+.image__content__1 h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.image__content__1 p {
+  color: var(--text-light);
+}
+
+.image__content__2 {
+  transform: translate(calc(-50% + 8rem), calc(-50% + 10rem));
+}
+
+.image__content__2 ul {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.image__content__2 li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: var(--text-light);
+}
+
+.image__content__2 span {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+
+@media (width < 900px) {
+  .nav__links {
+    display: none;
+  }
+
+  .header {
+    padding: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .image {
+    grid-area: 1/1/2/2;
+  }
+}
+.search {
+  max-width: 80%; /* Ensure the search bar covers the full width of its container */
+}
+
+.search form {
+  display: flex; /* Use flexbox to align items */
+  align-items: center; /* Vertically center items */
+}
+
+.search input[type="text"] {
+  flex: 1; /* Allow input to grow to fill available space */
+  padding: 0.75rem; /* Adjust padding as needed */
+  border: 1px solid #ccc; /* Border styles */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1.1rem; /* Set the font size of the input */
+}
+
+.search input[type="submit"] {
+  padding: 0.75rem 1.5rem; /* Adjust padding as needed */
+  margin-left: 0.5rem; /* Add margin to separate input and button */
+  background-color: var(--primary-color); /* Background color */
+  color: var(--white); /* Text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Cursor style */
+}
+
+.hospitals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.hospital {
+  flex: 1 1 300px;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hospital img {
+  max-width: 100%; /* Ensure the image fits within its container */
+  height: auto; /* Maintain the aspect ratio of the image */
+  display: block;
+  width: 100px; /* Set the width to 100px */
+  height: auto; /* Maintain the aspect ratio of the image */
+  display: block; /* Ensure proper display as a block element */
+  margin-bottom: 1rem;
+
+}
+
+
+.hospital h3 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.hospital p {
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+.hospital button {
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search input {
+    margin-bottom: 1rem;
+  }
+
+  .hospitals {
+    justify-content: center;
+  }
+}
+
+.info-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  background-color: #1B3C73;
+  color: white;
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 120px;
+}
+
+.info-item h3 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.info-item p {
+  margin: 5px 0 0;
+  font-size: 1.2em;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-bar input {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  width: 300px;
+}
+
+.search-bar button {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #1B3C73;
+  background-color: #1B3C73;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #45a049;
+}
