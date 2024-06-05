@@ -142,11 +142,12 @@
                             <label for="experience">Years of Experience:</label><br>
                             <input type="number" id="experience" name="experience" required><br>
                             <label for="workplace">Current Workplace:</label><br>
-              <select id="workplace" name="workplace" required>
-                <option value="" disabled selected>Select your workplace</option>
-                {% for hospital in hospitals %}
-                <option value="{{ hospital.id }}">{{ hospital.hospital_name }}</option>
-                {% endfor %}
+                            <select id="workplace" name="workplace" required>
+                                <option value="" disabled selected>Select your workplace</option>
+                                {% for hospital in hospitals %}
+                                <option value="{{ hospital.hospital_name }}">{{ hospital.hospital_name }}</option>
+                                {% endfor %}
+                            </select>
                             <label for="workAddress">Work Address:</label><br>
                             <textarea id="workAddress" name="workAddress" rows="4" required></textarea><br>
                             <label for="workContact">Contact Number (Work):</label><br>
