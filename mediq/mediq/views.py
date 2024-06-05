@@ -144,13 +144,14 @@ def doctorprofile(request,id):
     }
     return render(request, 'doctorprofile.html',data)
 
-def hospage(request,id):
+def hospage(request, id):
     hosplist = Hospreg.objects.get(id=id)
-    data={
-        'hosplist':hosplist
+    doctors = Docreg.objects.filter(workplace=hosplist.hospital_name)  # Filter doctors by workplace
+    data = {
+        'hosplist': hosplist,
+        'doctors': doctors
     }
-    return render(request, 'hospage.html',data)
-      # Assuming you have only one hospita
+    return render(request, 'hospage.html', data)
 
 def patlogin(request):
     error_message = None

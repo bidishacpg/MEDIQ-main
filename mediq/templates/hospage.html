@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ hosplist.hospital_name }}</title>
-    <link rel="stylesheet" href="/static/hosppagee.css">
+    <link rel="stylesheet" href="/static/hospage.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -68,12 +68,16 @@
     <section id="doctors" class="section">
         <div class="container">
             <h2>Doctors</h2>
+            {% for doctor in doctors %}
             <div class="card">
-                <h3>Doctors</h3>
-                <p>Doctor1:{{ hosplist.license }}</p>
-                <p>Doctor2:{{ hosplist.email }}</p>
+                <img src="{{ doctor.photo.url }}" alt="{{ doctor.fullname }}">
+                <h3>{{ doctor.fullname }}</h3>
+                <p>Specialization: {{ doctor.specialization }}</p>
+                <p>Experience: {{ doctor.experience }} years</p>
+                <p>Contact: {{ doctor.workContact }}</p>
+                <p>Email: {{ doctor.email }}</p>
             </div>
-            <!-- You can repeat the above div structure for other branches if needed -->
+            {% endfor %}
         </div>
     </section>
 
