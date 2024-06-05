@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+
 class Docreg(models.Model):
     id = models.AutoField(primary_key=True)
     fullname=models.CharField(max_length=50)
