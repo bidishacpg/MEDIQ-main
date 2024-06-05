@@ -25,30 +25,42 @@ def home(request):
 logger = logging.getLogger(__name__)
 
 def book(request):
-     if request.method=="POST":
-      first_name =request.POST.get('first_name')
-      last_name =request.POST.get('last_name')
-      age =request.POST.get('age')
-      email=request.POST.get('email')
-      gender =request.POST.get('gender')
-      hospital =request.POST.get('hospital')
-      doctor =request.POST.get('doctor')
-      message =request.POST.get('message')
-      phone =request.POST.get('phone')
-      en= Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital , doctor=doctor )
-      en.save()
-      try:
-          send_mail(
-         'Booking Confirm',
-         'your booking for hospital is confirmed',
-         'chapagaibidisha@gmail.com',
-         [email],
-         fail_silently=False
-      )
-      except Exception as e:
-            print(f"Error sending email: {e}")
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        age = request.POST.get('age')
+        email = request.POST.get('email')
+        gender = request.POST.get('gender')
+        hospital_id = request.POST.get('hospital')
+        doctor_id = request.POST.get('doctor')
+        message = request.POST.get('message')
+        phone = request.POST.get('phone')
 
-     return render(request,'appoint.html')
+        # Fetch hospital and doctor objects
+        hospital = Hospreg.objects.get(id=hospital_id)
+        doctor = Docreg.objects.get(id=doctor_id)
+
+        # Save the booking to the database
+        en = Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital, doctor=doctor)
+        en.save()
+
+        # Send confirmation email to the user
+        try:
+            send_mail(
+                'Booking Confirm',
+                f'Your booking for hospital {hospital.hospital_name} with Dr. {doctor.fullname} is confirmed.',
+                'chapagaibidisha@gmail.com',  # From email
+                [email],  # To email (user's email from the form)
+                fail_silently=False,
+            )
+        except Exception as e:
+            logger.error(f"Error sending email: {e}")
+
+    # Pass hospitals and doctors to the form template
+    hospitals = Hospreg.objects.all()
+    doctors = Docreg.objects.all()
+
+    return render(request, 'appoint.html', {'hospitals': hospitals, 'doctors': doctors})
 
 def docreg(request):
     if request.method == 'POST':
