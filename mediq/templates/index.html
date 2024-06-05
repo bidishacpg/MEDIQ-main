@@ -82,7 +82,7 @@
           {%endif%}
           <h3>{{a.hospital_name}}Hospital</h3>
           <p>Address:{{a.address}},{{a.city}}</p>
-          <button class="btn">View Details</button>
+          <button class="btn"><a href="{% url 'hospage' a.id %}" class="no-underline">View Details</a></button>
         </div>
         {%empty%}
     No Hospitals 
