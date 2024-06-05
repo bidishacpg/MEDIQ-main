@@ -10,6 +10,8 @@ from patientreg.models import Patientreg
 from docreg.models import Docreg
 from hospreg.models import Hospreg
 import logging
+from django.contrib.auth import logout
+from django.contrib import messages
 
 
 def home(request):
@@ -93,21 +95,30 @@ def doclist(request):
     return render(request,"doclist.html",dat)
 
 def doclogin(request):
-     error_message = None
-     if request.method == 'POST':
+    error_message = None
+    if request.method == 'POST':
         form = docloginn(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             try:
                 docreg = Docreg.objects.get(email=email, password=password)
+                request.session['docreg_id'] = docreg.id
+                request.session['docreg_email'] = docreg.email
                 return redirect('dochome')  # Redirect to a success page
-            except :
-                error_message = 'Invalid username or password(please provide unique email address)'
-     else:
+            except Docreg.DoesNotExist:
+                error_message = 'Invalid username or password (please provide unique email address)'
+    else:
         form = docloginn()
-     return render(request, 'doclogin.html', {'form': form, 'error_message': error_message})
-
+    return render(request, 'doclogin.html', {'form': form, 'error_message': error_message})
+ 
+def doclogout(request):
+    try:
+        del request.session['docreg_id']
+        del request.session['docreg_email']
+    except KeyError:
+        pass
+    return redirect('doclogin')
 
 #subject='testing mail'
 #form_emails='bidishachapagai@gmail.com'
@@ -162,12 +173,22 @@ def patlogin(request):
             password = form.cleaned_data['password']
             try:
                 patientreg = Patientreg.objects.get(email=email, password=password)
+                request.session['patientreg_id'] = patientreg.id
+                request.session['patientreg_email'] = patientreg.email
                 return redirect('pathome')  # Redirect to a success page
-            except :
+            except Patientreg.DoesNotExist:
                 error_message = 'Invalid username or password'
     else:
         form = patloginn()
     return render(request, 'patlogin.html', {'form': form, 'error_message': error_message})
+
+def patlogout(request):
+    try:
+        del request.session['patientreg_id']
+        del request.session['patient_email']
+    except KeyError:
+        pass
+    return redirect('patlogin')
 
     
 def hospreg(request):
@@ -191,21 +212,25 @@ def hospreg(request):
 
 
 def hosplogin(request):
-    error_message = None
     if request.method == 'POST':
-        form = hosploginn(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            try:
-                hospreg = Hospreg.objects.get(email=email, password=password)
-                return redirect('hosphome')  # Redirect to a success page
-            except :
-                error_message = 'Invalid username or password'
-    else:
-        form = hosploginn()
-    return render(request, 'hosplogin.html', {'form': form, 'error_message': error_message})
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            hospreg = Hospreg.objects.get(email=email, password=password)
+            request.session['hospreg_id'] = hospreg.id
+            request.session['hospreg_email'] = hospreg.email
+            return redirect('hosphome')  # Redirect to a success page
+        except Hospreg.DoesNotExist:
+            messages.error(request, 'Invalid username or password')
+    return render(request, 'hosplogin.html')
 
+def hosplogout(request):
+    try:
+        del request.session['hospreg_id']
+        del request.session['hospreg_email']
+    except KeyError:
+        pass
+    return redirect('hosplogin')
 
 def ambulance(request):
     return render(request,"ambulance.html")

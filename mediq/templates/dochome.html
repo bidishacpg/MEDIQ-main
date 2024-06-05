@@ -7,7 +7,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/static/indexxx.css">
+    <link rel="stylesheet" href="/static/inde.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title> Doc Home Page</title>
   </head>
@@ -23,14 +23,9 @@
           <li class="link"><a href="/doclist">Doctors</a></li>
           <li class="link"><a href="hosplist/">Hospitals</a></li>
           <li class="link"><a href="contact/">Contact</a></li>
-          <li class="dropdown">
-            <button class="dropbtn">Login/Register</button>
-            <div class="dropdown-content">
-              <a href="patlogin/">Patient</a>
-              <a href="hosplogin/">Hospital</a>
-              <a href="doclogin/">Doctor</a>
-            </div>
-          </li>
+          {% if request.session.docreg_id %}
+          <li class="link"><a href="{% url 'doclogout' %}">Logout</a></li>
+        {% endif %}
      <!--<button class="btn">Login/Register</button> -->
       </nav>
       <header class="header">
