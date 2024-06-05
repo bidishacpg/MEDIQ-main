@@ -36,4 +36,5 @@ class Docreg(models.Model):
     sunday_end = models.TimeField(null=True, blank=True)
 
 
-    
+    def __str__(self):
+        return self.fullname

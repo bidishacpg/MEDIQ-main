@@ -79,8 +79,8 @@
                 <label for="doctor">Doctor:</label>
                 <select id="doctor" name="doctor" required>
                     <option value="">Select Doctors</option>
-                    {% for doctors in doctors %}
-                    <option value="{{ doctors.id }}">{{ doctors.fullname }} </option>
+                    {% for doctor in doctors %}
+                    <option value="{{ doctor.id }}">{{ doctor.fullname }} </option>
                     {% endfor %}
                 </select>
                 <small class="error-message" id="doctorError"></small>
