@@ -24,7 +24,9 @@
         <li><a href="#" onclick="showDoctors()"><i class="fas fa-user-md"></i> Doctors</a></li>
         <li><a href="#" onclick="showpatients()"><i class="fas fa-user-injured"></i> Patients</a></li>
         <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
-        <li><a href="logout.php" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        {% if request.session.hospreg_id %}
+          <li class="link"><a href="{% url 'hosplogout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        {% endif %}
       </ul>
     </aside>
     <main class="content">
