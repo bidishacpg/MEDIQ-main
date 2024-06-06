@@ -8,7 +8,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/static/doclogin.css">
-    <link rel="stylesheet" href="/static/indexx.css">
+    <link rel="stylesheet" href="/static/inde.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title> MEDIQUICK</title>
   </head>
@@ -44,15 +44,18 @@
             <img src="/static/img/insta.png">
             <img src="/static/img/goog.png">
 </div>
-
-<form action="doclogin.html" method="post" name="form1" class="input" onsubmit="return validateForm()">
-
-    <input type="text" class="input-field" name="hospitalemail"placeholder="Enter your hospitalemail" >
+{% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+<form action="{% url 'hosplogin' %}" method="post" name="form1" class="input" onsubmit="return validateForm()">
+  {% csrf_token %}
+  
+    <input type="text" class="input-field" name="email"placeholder="Enter your hospitalemail" >
     <input type="password" class="input-field" name="password" placeholder="Enter your Password" >
     <input type="checkbox" class="checkbox"><span>Remember Password </span>
     <button type="submit" class="submit-btn" name="Login">Login</button>
     <div class="container reg">
-    <p>Haven't Registered Yet? <a href="/hospreg">Register Here</a></p>
+    <p>Haven't Registered Yet? <a href="/hospregister">Register Here</a></p>
   </div>
 </form>
 

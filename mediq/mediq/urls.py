@@ -31,15 +31,28 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('doclogin/', views.doclogin, name="doclogin"),
     path('docreg/',views.docreg, name="docreg"),
+    path('hosplogin/',views.hosplogin, name="hosplogin"),
     path('patreg/',views.patreg, name="patreg"),
+    path('patlogin/',views.patlogin, name="patlogin"),
     path('book/',views.book, name="book"),
     path('hospregister/',views.hospreg, name="hospregister"),
-    path('hospage/',views.hospage, name="hospage"),
     path('contact/',views.contact, name="contact"),
     path('aboutus/',views.aboutus, name="aboutus"),
     path('services/',views.services,name="services"),
     path('doclist/',views.doclist,name="doclist"),
-    path('hosplist/',views.hosplist,name="hosplist")
+    path('hosplist/',views.hosplist,name="hosplist"),
+    path('ambulance/',views.ambulance,name="ambulance"),
+    path('pathome/',views.pathome,name="pathome"),
+    path('dochome/',views.dochome,name="dochome"),
+    path('hosphome/',views.hosphome,name="hosphome"),
+    path('doctorprofile/<id>',views.doctorprofile,name="doctorprofile"),
+     path('hosplogout/', views.hosplogout, name='hosplogout'),
+     path('patlogout/', views.patlogout, name='patlogout'),
+     path('doclogout/', views.doclogout, name='doclogout'),
+     path('hospage/<id>',views.hospage,name="hospage"),
+     path('confirm_appointment/<int:booking_id>/', views.confirm_appointment, name='confirm_appointment'),
+    path('delete_appointment/<int:booking_id>/', views.delete_appointment, name='delete_appointment'),
+
 
     
 ]

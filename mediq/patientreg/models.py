@@ -1,6 +1,7 @@
 from django.db import models
 from tinymce.models import HTMLField
 class Patientreg(models.Model):
+    id = models.AutoField(primary_key=True)
     first_name=models.CharField(max_length=50)
     last_name=models.CharField(max_length=50)
     email=models.CharField(max_length=50)
@@ -11,3 +12,6 @@ class Patientreg(models.Model):
     message=models.TextField()
     phone=models.CharField(max_length=50)
     photo = models.ImageField(upload_to='patient/',max_length=250,null=True,default=None)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

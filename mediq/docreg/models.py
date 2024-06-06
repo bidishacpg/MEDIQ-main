@@ -1,13 +1,15 @@
 from django.db import models
 from tinymce.models import HTMLField
+
 class Docreg(models.Model):
+    id = models.AutoField(primary_key=True)
     fullname=models.CharField(max_length=50)
     gender=models.CharField(max_length=50)
     dob=models.DateField()
     languages=models.CharField(max_length=50)
     nationality=models.CharField(max_length=50)
     contactNumber=models.CharField(max_length=50)
-    email=models.CharField(max_length=50)
+    email=models.EmailField(max_length=50,unique=True)
     medicalDegree=models.CharField(max_length=50)
     licenseNumber=models.CharField(max_length=50)
     specialization=models.CharField(max_length=50)
@@ -35,4 +37,5 @@ class Docreg(models.Model):
     sunday_end = models.TimeField(null=True, blank=True)
 
 
-    
+    def __str__(self):
+        return self.fullname
