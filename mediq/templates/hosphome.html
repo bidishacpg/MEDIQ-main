@@ -12,17 +12,17 @@
   <div class="container">
     <aside class="sidebar">
       <div class="logo">
-        {%for a in hosplist %}
-        {% if a.photo %} 
+        {% for a in hosplist %}
+        {% if a.photo %}
         <img src="{{ a.photo.url }}" alt="Hospital Logo">
-        {%endif%}
-        <h1>Hospital Admin</h1>
+        {% endif %}
+        <h1>{{a.hospital_name}} Hospital Admin</h1>
       </div>
       <ul class="navigation">
-        <li><a href="#" onclick="showHome()"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="#" onclick="showappointments()"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
-        <li><a href="#" onclick="showDoctors()"><i class="fas fa-user-md"></i> Doctors</a></li>
-        <li><a href="#" onclick="showpatients()"><i class="fas fa-user-injured"></i> Patients</a></li>
+        <li><a href="#" onclick="showSection('homePage')"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" onclick="showSection('appointmentsPage')"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+        <li><a href="#" onclick="showSection('doctorPage')"><i class="fas fa-user-md"></i> Doctors</a></li>
+        <li><a href="#" onclick="showSection('patientsPage')"><i class="fas fa-user-injured"></i> Patients</a></li>
         <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
         {% if request.session.hospreg_id %}
           <li class="link"><a href="{% url 'hosplogout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
@@ -31,60 +31,55 @@
     </aside>
     <main class="content">
       <div id="homePage">
-        <h2>Welcome  {{a.hospital_name}} Hospital </h2>
+        <h2>Welcome {{ a.hospital_name }} Hospital </h2>
+        {% endfor %}
       </div>
-      {% endfor %}
-      <section class="main">
-          <div class="appointmentsPage">
-            <h1>Find Recent Appointments</h1>
-          <table width='80%' border=2 border-color='red'>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Doctor</th>
-                <th>Message</th>
-                <th>Phone</th>
-            </tr>
-            {% for booking in bookings %}
-            <tr>
-                <td>{{ booking.first_name }}</td>
-                <td>{{ booking.last_name }}</td>
-                <td>{{ booking.email }}</td>
-                <td>{{ booking.age }}</td>
-                <td>{{ booking.gender }}</td>
-                <td>{{ booking.doctor }}</td>
-                <td>{{ booking.message }}</td>
-                <td>{{ booking.phone }}</td>
-                <td class="action-buttons">
-                  <button onclick="window.location.href='{% url 'confirm_appointment' booking.id %}'">Confirm</button>
-
-<!-- In the Delete button onclick attribute -->
-<button onclick="window.location.href='{% url 'delete_appointment' booking.id %}'">Delete</button>
-                </td>
-            </tr>
-            {% endfor %}
+      <div id="appointmentsPage" class="main">
+        <h1>Find Recent Appointments</h1>
+        <table width='80%' border=2 border-color='red'>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Doctor</th>
+            <th>Message</th>
+            <th>Phone</th>
+          </tr>
+          {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.first_name }}</td>
+            <td>{{ booking.last_name }}</td>
+            <td>{{ booking.email }}</td>
+            <td>{{ booking.age }}</td>
+            <td>{{ booking.gender }}</td>
+            <td>{{ booking.doctor }}</td>
+            <td>{{ booking.message }}</td>
+            <td>{{ booking.phone }}</td>
+            <td class="action-buttons">
+              <button onclick="window.location.href='{% url 'confirm_appointment' booking.id %}'">Confirm</button>
+              <button onclick="window.location.href='{% url 'delete_appointment' booking.id %}'">Delete</button>
+            </td>
+          </tr>
+          {% endfor %}
         </table>
       </div>
-    </section>
-    <section class="main">
-      <div class="doctorPage">
-        <h1> Our Doctors </h1>
-      <table width='80%' border=2 border-color='red'>
-        <tr>
-            <th>full Name</th>
-            <th>gender</th>
-            <th>email</th>
+      <div id="doctorPage" class="main">
+        <h1>Our Doctors</h1>
+        <table width='80%' border=2 border-color='red'>
+          <tr>
+            <th>Full Name</th>
+            <th>Gender</th>
+            <th>Email</th>
             <th>Contact</th>
-            <th>medical degree</th>
-            <th>specialization</th>
-            <th>work email</th>
-            <th>experience</th>
-        </tr>
-        {% for doctor in doctors %}
-        <tr>
+            <th>Medical Degree</th>
+            <th>Specialization</th>
+            <th>Work Email</th>
+            <th>Experience</th>
+          </tr>
+          {% for doctor in doctors %}
+          <tr>
             <td>{{ doctor.fullname }}</td>
             <td>{{ doctor.gender }}</td>
             <td>{{ doctor.email }}</td>
@@ -93,56 +88,26 @@
             <td>{{ doctor.specialization }}</td>
             <td>{{ doctor.workEmail }}</td>
             <td>{{ doctor.experience }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-  </div>
-</section>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div id="patientsPage" class="main">
+        <!-- Add your patients content here -->
+      </div>
     </main>
+  </div>
 
   <script>
-    function showHome() {
-      document.getElementById("homePage").style.display = "block";
-      document.getElementById("appointmentsPage").style.display = "none";
+    function showSection(sectionId) {
+      const sections = ['homePage', 'appointmentsPage', 'doctorPage', 'patientsPage'];
+      sections.forEach(id => {
+        document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
+      });
     }
 
-    function showAppointments() {
-      document.getElementById("homePage").style.display = "none";
-      document.getElementById("appointmentsPage").style.display = "block";
-      // Here you can add code to fetch and display appointments dynamically
-    }
-    // Add similar functions for other navigation links as needed
+    // Show home section by default
+    showSection('homePage');
   </script>
-  <script>
-    function confirmBooking(bookingId) {
-        if (confirm("Are you sure you want to confirm this appointment?")) {
-            // If confirmed, trigger action (e.g., send email)
-            // You can use AJAX to send an HTTP request to your server to send the email
-            // Example AJAX code:
-            /*
-            $.ajax({
-                url: "/confirm_appointment/" + bookingId + "/",
-                method: "POST",
-                success: function(response) {
-                    alert("Appointment confirmed successfully!");
-                    // Optionally, you can reload the page or update the UI
-                },
-                error: function(xhr, status, error) {
-                    alert("Error confirming appointment: " + error);
-                }
-            });
-            */
-            // For this example, let's assume confirmation is successful
-            alert("Appointment confirmed successfully!");
-        }
-    }
-
-    function deleteBooking(bookingId) {
-        if (confirm("Are you sure you want to delete this appointment?")) {
-            // If confirmed, redirect to delete endpoint with the booking ID
-            window.location.href = "/delete_appointment/" + bookingId + "/";
-        }
-    }
-</script>
 </body>
 </html>

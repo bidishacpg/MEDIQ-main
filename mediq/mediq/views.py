@@ -15,6 +15,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 
 def home(request):
@@ -48,18 +49,6 @@ def book(request):
         # Save the booking to the database
         en = Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital, doctor=doctor)
         en.save()
-
-        # Send confirmation email to the user
-        try:
-            send_mail(
-                'Booking Confirm',
-                f'Your booking for hospital {hospital.hospital_name} with Dr. {doctor.fullname} is confirmed.',
-                'chapagaibidisha@gmail.com',  # From email
-                [email],  # To email (user's email from the form)
-                fail_silently=False,
-            )
-        except Exception as e:
-            logger.error(f"Error sending email: {e}")
 
     # Pass hospitals and doctors to the form template
     hospitals = Hospreg.objects.all()
@@ -275,6 +264,21 @@ def hosphome(request):
 def confirm_appointment(request, booking_id):
     # Get the booking object
     booking = get_object_or_404(Book, id=booking_id)
+    booking.confirmed = True
+    booking.save()
+    try:
+            send_mail(
+                'appointment Confirm',
+                f'Your booking for hospital {booking.hospital} with Dr. {booking.doctor} is confirmed.',
+                'chapagaibidisha@gmail.com',  # From email
+                [booking.email],  # To email (user's email from the form)
+                fail_silently=False,
+            )
+    except Exception as e:
+            logger.error(f"Error sending email: {e}")
+    # Perform actions related to confirmation (e.g., send email)
+    # Assuming confirmation is successful, you can redirect to the same page or any other page
+    # For now, let's redirect to the same page
     # Perform actions related to confirmation (e.g., send email)
     # Assuming confirmation is successful, you can redirect to the same page or any other page
     # For now, let's redirect to the same page
