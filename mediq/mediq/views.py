@@ -245,9 +245,14 @@ def services(request):
 
 def pathome(request):
     return render(request,"pathome.html")
-
+@login_required
 def dochome(request):
-    return render(request,"dochome.html")
+    docreg_id = request.session.get('docreg_id')
+    
+    # Retrieve data relevant to the logged-in hospital
+    doclist = Docreg.objects.filter(id=docreg_id)
+    bookings = Book.objects.filter(doctor__in=[doc.fullname for doc in doclist])
+    return render(request,"dochome.html",{'doclist': doclist, 'bookings': bookings})
 
 @login_required
 def hosphome(request):
