@@ -10,6 +10,12 @@ from patientreg.models import Patientreg
 from docreg.models import Docreg
 from hospreg.models import Hospreg
 import logging
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 
 def home(request):
@@ -43,18 +49,6 @@ def book(request):
         # Save the booking to the database
         en = Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital, doctor=doctor)
         en.save()
-
-        # Send confirmation email to the user
-        try:
-            send_mail(
-                'Booking Confirm',
-                f'Your booking for hospital {hospital.hospital_name} with Dr. {doctor.fullname} is confirmed.',
-                'chapagaibidisha@gmail.com',  # From email
-                [email],  # To email (user's email from the form)
-                fail_silently=False,
-            )
-        except Exception as e:
-            logger.error(f"Error sending email: {e}")
 
     # Pass hospitals and doctors to the form template
     hospitals = Hospreg.objects.all()
@@ -93,21 +87,30 @@ def doclist(request):
     return render(request,"doclist.html",dat)
 
 def doclogin(request):
-     error_message = None
-     if request.method == 'POST':
+    error_message = None
+    if request.method == 'POST':
         form = docloginn(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             try:
                 docreg = Docreg.objects.get(email=email, password=password)
+                request.session['docreg_id'] = docreg.id
+                request.session['docreg_email'] = docreg.email
                 return redirect('dochome')  # Redirect to a success page
-            except :
-                error_message = 'Invalid username or password(please provide unique email address)'
-     else:
+            except Docreg.DoesNotExist:
+                error_message = 'Invalid username or password (please provide unique email address)'
+    else:
         form = docloginn()
-     return render(request, 'doclogin.html', {'form': form, 'error_message': error_message})
-
+    return render(request, 'doclogin.html', {'form': form, 'error_message': error_message})
+ 
+def doclogout(request):
+    try:
+        del request.session['docreg_id']
+        del request.session['docreg_email']
+    except KeyError:
+        pass
+    return redirect('doclogin')
 
 #subject='testing mail'
 #form_emails='bidishachapagai@gmail.com'
@@ -162,12 +165,22 @@ def patlogin(request):
             password = form.cleaned_data['password']
             try:
                 patientreg = Patientreg.objects.get(email=email, password=password)
+                request.session['patientreg_id'] = patientreg.id
+                request.session['patientreg_email'] = patientreg.email
                 return redirect('pathome')  # Redirect to a success page
-            except :
+            except Patientreg.DoesNotExist:
                 error_message = 'Invalid username or password'
     else:
         form = patloginn()
     return render(request, 'patlogin.html', {'form': form, 'error_message': error_message})
+
+def patlogout(request):
+    try:
+        del request.session['patientreg_id']
+        del request.session['patient_email']
+    except KeyError:
+        pass
+    return redirect('patlogin')
 
     
 def hospreg(request):
@@ -191,21 +204,25 @@ def hospreg(request):
 
 
 def hosplogin(request):
-    error_message = None
     if request.method == 'POST':
-        form = hosploginn(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            try:
-                hospreg = Hospreg.objects.get(email=email, password=password)
-                return redirect('hosphome')  # Redirect to a success page
-            except :
-                error_message = 'Invalid username or password'
-    else:
-        form = hosploginn()
-    return render(request, 'hosplogin.html', {'form': form, 'error_message': error_message})
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            hospreg = Hospreg.objects.get(email=email, password=password)
+            request.session['hospreg_id'] = hospreg.id
+            request.session['hospreg_email'] = hospreg.email
+            return redirect('hosphome')  # Redirect to a success page
+        except Hospreg.DoesNotExist:
+            messages.error(request, 'Invalid username or password')
+    return render(request, 'hosplogin.html')
 
+def hosplogout(request):
+    try:
+        del request.session['hospreg_id']
+        del request.session['hospreg_email']
+    except KeyError:
+        pass
+    return redirect('hosplogin')
 
 def ambulance(request):
     return render(request,"ambulance.html")
@@ -228,12 +245,54 @@ def services(request):
 
 def pathome(request):
     return render(request,"pathome.html")
-
+@login_required
 def dochome(request):
-    return render(request,"dochome.html")
+    docreg_id = request.session.get('docreg_id')
+    
+    # Retrieve data relevant to the logged-in hospital
+    doclist = Docreg.objects.filter(id=docreg_id)
+    bookings = Book.objects.filter(doctor__in=[doc.fullname for doc in doclist])
+    return render(request,"dochome.html",{'doclist': doclist, 'bookings': bookings})
 
+@login_required
 def hosphome(request):
-    return render(request,"hosphome.html")
+    # Retrieve hospital registration details from session
+    hospreg_id = request.session.get('hospreg_id')
+    
+    # Retrieve data relevant to the logged-in hospital
+    hosplist = Hospreg.objects.filter(id=hospreg_id)
+    bookings = Book.objects.filter(hospital__in=[hosp.hospital_name for hosp in hosplist])
+    doctors = Docreg.objects.filter(workplace__in=[hosp.hospital_name for hosp in hosplist])
+    # Pass the hospital data to the template for rendering
+    return render(request, 'hosphome.html', {'hosplist': hosplist, 'bookings': bookings,'doctors':doctors})
 
+def confirm_appointment(request, booking_id):
+    # Get the booking object
+    booking = get_object_or_404(Book, id=booking_id)
+    booking.confirmed = True
+    booking.save()
+    try:
+            send_mail(
+                'appointment Confirm',
+                f'Your booking for hospital {booking.hospital} with Dr. {booking.doctor} is confirmed.',
+                'chapagaibidisha@gmail.com',  # From email
+                [booking.email],  # To email (user's email from the form)
+                fail_silently=False,
+            )
+    except Exception as e:
+            logger.error(f"Error sending email: {e}")
+    # Perform actions related to confirmation (e.g., send email)
+    # Assuming confirmation is successful, you can redirect to the same page or any other page
+    # For now, let's redirect to the same page
+    # Perform actions related to confirmation (e.g., send email)
+    # Assuming confirmation is successful, you can redirect to the same page or any other page
+    # For now, let's redirect to the same page
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+def delete_appointment(request, booking_id):
+    # Get the booking object
+    booking = get_object_or_404(Book, id=booking_id)
+    # Perform deletion
+    booking.delete()
+    # Redirect to the same page or any other page after deletion
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

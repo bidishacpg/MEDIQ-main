@@ -1,114 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/static/indexxx.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title> hospital home page</title>
-  </head>
-  <body>
-    <div class="container">
-      <nav>
-        <div class="nav__logo">MEDIQUICK</div>
-        <ul class="nav__links">
-          <li class="link"><a href="">Home</a></li>
-          <li class="link"><a href="aboutus/">About Us</a></li>
-          <li class="link"><a href="/services">Services</a></li>
-          <li class="link"><a href="/ambulance">Ambulance</a></li>
-          <li class="link"><a href="/doclist">Doctors</a></li>
-          <li class="link"><a href="hosplist/">Hospitals</a></li>
-          <li class="link"><a href="contact/">Contact</a></li>
-          <li class="dropdown">
-            <button class="dropbtn">Login/Register</button>
-            <div class="dropdown-content">
-              <a href="patlogin/">Patient</a>
-              <a href="hosplogin/">Hospital</a>
-              <a href="doclogin/">Doctor</a>
-            </div>
-          </li>
-     <!--<button class="btn">Login/Register</button> -->
-      </nav>
-      <header class="header">
-        <div class="content">
-          <h1><span>Get Quick</span><br />Appointment Services</h1>
-          <p>
-            In today's fast-paced world, access to prompt and efficient medical
-            services is of paramount importance. When faced with a medical
-            emergency or seeking immediate medical attention, the ability to
-            receive quick medical services can significantly impact the outcome
-            of a situation.
-          </p>
-          <button class="btn"><a href="/book" class="no-underline">Book Appointment</a></button>
-        </div>
-        <div class="image">
-          <span class="image__bg"></span>
-          <img src="/static/img/cutu.jpg" alt="header image" />
-          </div>
-        </div>
-      </header>
-      <div class="search">
-        <input type="text" placeholder="Search for hospitals...">
-        <button><i class="search-btn">Search</i></button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Admin Dashboard</title>
+  <link rel="stylesheet" href="/static/hosphome.css">
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        {% for a in hosplist %}
+        {% if a.photo %}
+        <img src="{{ a.photo.url }}" alt="Hospital Logo">
+        {% endif %}
+        <h1>{{a.hospital_name}} Hospital Admin</h1>
       </div>
-      <div class="hospitals">
-        {%for a in hosplist %}
-        <div class="hospital">
-          {% if a.photo %} 
-          <img src="{{ a.photo.url }}" alt="">
-          {%endif%}
-          <h3>{{a.hospital_name}}Hospital</h3>
-          <p>Address:{{a.address}},{{a.city}}</p>
-          <button class="btn">View Details</button>
-        </div>
+      <ul class="navigation">
+        <li><a href="#" onclick="showSection('homePage')"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" onclick="showSection('appointmentsPage')"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+        <li><a href="#" onclick="showSection('doctorPage')"><i class="fas fa-user-md"></i> Doctors</a></li>
+        <li><a href="#" onclick="showSection('patientsPage')"><i class="fas fa-user-injured"></i> Patients</a></li>
+        <li><a href="settings.php"><i class="fas fa-cog"></i> Settings</a></li>
+        {% if request.session.hospreg_id %}
+          <li class="link"><a href="{% url 'hosplogout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        {% endif %}
+      </ul>
+    </aside>
+    <main class="content">
+      <div id="homePage">
+        <h2>Welcome {{ a.hospital_name }} Hospital </h2>
         {% endfor %}
       </div>
-       <!--- <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-    </div>-->
-    {% include "footer.html" %}
- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+      <div id="appointmentsPage" class="main">
+        <h1>Find Recent Appointments</h1>
+        <table width='80%' border=2 border-color='red'>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Doctor</th>
+            <th>Message</th>
+            <th>Phone</th>
+          </tr>
+          {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.first_name }}</td>
+            <td>{{ booking.last_name }}</td>
+            <td>{{ booking.email }}</td>
+            <td>{{ booking.age }}</td>
+            <td>{{ booking.gender }}</td>
+            <td>{{ booking.doctor }}</td>
+            <td>{{ booking.message }}</td>
+            <td>{{ booking.phone }}</td>
+            <td class="action-buttons">
+              <button onclick="window.location.href='{% url 'confirm_appointment' booking.id %}'">Confirm</button>
+              <button onclick="window.location.href='{% url 'delete_appointment' booking.id %}'">Delete</button>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div id="doctorPage" class="main">
+        <h1>Our Doctors</h1>
+        <table width='80%' border=2 border-color='red'>
+          <tr>
+            <th>Full Name</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Medical Degree</th>
+            <th>Specialization</th>
+            <th>Work Email</th>
+            <th>Experience</th>
+          </tr>
+          {% for doctor in doctors %}
+          <tr>
+            <td>{{ doctor.fullname }}</td>
+            <td>{{ doctor.gender }}</td>
+            <td>{{ doctor.email }}</td>
+            <td>{{ doctor.contactNumber }}</td>
+            <td>{{ doctor.medicalDegree }}</td>
+            <td>{{ doctor.specialization }}</td>
+            <td>{{ doctor.workEmail }}</td>
+            <td>{{ doctor.experience }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div id="patientsPage" class="main">
+        <!-- Add your patients content here -->
+      </div>
+    </main>
+  </div>
 
-  </body>
+  <script>
+    function showSection(sectionId) {
+      const sections = ['homePage', 'appointmentsPage', 'doctorPage', 'patientsPage'];
+      sections.forEach(id => {
+        document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
+      });
+    }
+
+    // Show home section by default
+    showSection('homePage');
+  </script>
+</body>
 </html>
