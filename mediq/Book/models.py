@@ -8,5 +8,6 @@ class Book(models.Model):
     gender=models.CharField(max_length=50)
     hospital=models.CharField(max_length=50)
     doctor=models.CharField(max_length=50)
+    date = models.DateField()
     message=models.TextField()
     phone=models.CharField(max_length=50)
