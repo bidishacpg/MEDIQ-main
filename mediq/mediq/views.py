@@ -47,6 +47,10 @@ def book(request):
         hospital = Hospreg.objects.get(id=hospital_id)
         doctor = Docreg.objects.get(id=doctor_id)
 
+        booking_count = Book.objects.filter(date=date).count()
+        if booking_count >= 5:
+            return HttpResponse("Sorry, the maximum number of bookings for this date has been reached. Please select another date.")
+
         # Save the booking to the database
         en = Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital, doctor=doctor, date=date)
         en.save()
