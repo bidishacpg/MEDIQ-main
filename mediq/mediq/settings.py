@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'patientreg',
     'docreg',
     'Book',
-    'hospreg'
+    'hospreg',
+    'contact'
 ]
 
 MIDDLEWARE = [

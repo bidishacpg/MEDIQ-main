@@ -6,6 +6,7 @@ from hospreg.forms import hospregisterr, hosploginn
 from docreg.forms import docregisterr, docloginn
 from patientreg.forms import patregisterr, patloginn
 from Book.models import Book
+from contact.forms import Contactform
 from patientreg.models import Patientreg
 from docreg.models import Docreg
 from hospreg.models import Hospreg
@@ -240,8 +241,6 @@ def hosplist(request):
     }
     return render(request,"hosplist.html",dat)
 
-def contact(request):
-    return render(request,"contact.html")
 def aboutus(request):
     return render(request,"aboutus.html")
 
@@ -301,3 +300,15 @@ def delete_appointment(request, booking_id):
     booking.delete()
     # Redirect to the same page or any other page after deletion
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def contact(request):
+    if request.method == 'POST':
+        form = Contactform(request.POST)
+        if form.is_valid():
+            form.save()  # Save data to the database
+            return redirect('contact')  # Redirect to a success page
+    else:
+        form = Contactform()
+    
+    return render(request, 'contact.html', {'form': form})
+     
