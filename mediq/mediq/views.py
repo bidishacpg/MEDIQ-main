@@ -21,7 +21,10 @@ from django.http import JsonResponse
 
 def home(request):
     hosplist = Hospreg.objects.all()
-    doclist = Docreg.objects.all()  # Fetch all doctors
+    doclist = Docreg.objects.all()  
+    hospital_count = Hospreg.objects.count()
+    doctor_count = Docreg.objects.count()
+    patient_count = Patientreg.objects.count()# Fetch all doctors
     
     if request.method == "GET":
         jb = request.GET.get('hospname')
@@ -30,7 +33,10 @@ def home(request):
     
     context = {
         'hosplist': hosplist,
-        'doclist': doclist,  # Add doctors to the context
+        'doclist': doclist,
+           'hospital_count': hospital_count,
+        'doctor_count': doctor_count,
+        'patient_count': patient_count,  # Add doctors to the context
     }
     
     return render(request, "index.html", context)
