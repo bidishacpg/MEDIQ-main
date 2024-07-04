@@ -116,13 +116,20 @@
           <!-- Example review card: -->
           <div class="review-card">
             {% if a.photo %}
-              <img src="{{ doctor.photo.url }}" alt="">
+              <img src="{{ a.photo.url }}" alt="">
             {% endif %}
               <p>{{a.username}}</p>
             </div>
             <p class="review-text">
               {{a.feedback}}
             </p>
+          </div>
+          <div class="rating">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
           </div>
           {% endfor %}
           <!-- Add more review cards as needed -->
