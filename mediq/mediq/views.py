@@ -20,15 +20,20 @@ from django.http import JsonResponse
 
 
 def home(request):
-    hosplist=Hospreg.objects.all()
-    if request.method=="GET":
-       jb =request.GET.get('hospname')
-    if jb !=None:
-       hosplist=Hospreg.objects.filter(hospital_name__icontains= jb)
-    dat={
-        'hosplist':hosplist
+    hosplist = Hospreg.objects.all()
+    doclist = Docreg.objects.all()  # Fetch all doctors
+    
+    if request.method == "GET":
+        jb = request.GET.get('hospname')
+        if jb is not None:
+            hosplist = Hospreg.objects.filter(hospital_name__icontains=jb)
+    
+    context = {
+        'hosplist': hosplist,
+        'doclist': doclist,  # Add doctors to the context
     }
-    return render(request,"index.html",dat)
+    
+    return render(request, "index.html", context)
 logger = logging.getLogger(__name__)
 
 def book(request):
