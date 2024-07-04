@@ -131,6 +131,18 @@
         const doctorError = document.getElementById('doctorError');
         const messageError = document.getElementById('messageError');
         const phoneError = document.getElementById('phoneError');
+
+        const dateInput = document.getElementById('date');
+
+    // Get today's date and tomorrow's date
+    const today = new Date().toISOString().split('T')[0];
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowDate = tomorrow.toISOString().split('T')[0];
+
+    // Set the min and max attributes of the date input
+    dateInput.setAttribute('min', today);
+    dateInput.setAttribute('max', tomorrowDate);
     
         // Function to validate email format
         const validateEmail = (email) => {

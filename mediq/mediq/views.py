@@ -15,6 +15,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 
 def home(request):
@@ -38,6 +39,7 @@ def book(request):
         gender = request.POST.get('gender')
         hospital_id = request.POST.get('hospital')
         doctor_id = request.POST.get('doctor')
+        date= request.POST.get('date')
         message = request.POST.get('message')
         phone = request.POST.get('phone')
 
@@ -45,21 +47,13 @@ def book(request):
         hospital = Hospreg.objects.get(id=hospital_id)
         doctor = Docreg.objects.get(id=doctor_id)
 
-        # Save the booking to the database
-        en = Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital, doctor=doctor)
-        en.save()
+        booking_count = Book.objects.filter(date=date).count()
+        if booking_count >= 5:
+            return HttpResponse("Sorry, the maximum number of bookings for this date has been reached. Please select another date.")
 
-        # Send confirmation email to the user
-        try:
-            send_mail(
-                'Booking Confirm',
-                f'Your booking for hospital {hospital.hospital_name} with Dr. {doctor.fullname} is confirmed.',
-                'chapagaibidisha@gmail.com',  # From email
-                [email],  # To email (user's email from the form)
-                fail_silently=False,
-            )
-        except Exception as e:
-            logger.error(f"Error sending email: {e}")
+        # Save the booking to the database
+        en = Book(first_name=first_name, last_name=last_name, age=age, email=email, phone=phone, message=message, gender=gender, hospital=hospital, doctor=doctor, date=date)
+        en.save()
 
     # Pass hospitals and doctors to the form template
     hospitals = Hospreg.objects.all()
@@ -256,9 +250,14 @@ def services(request):
 
 def pathome(request):
     return render(request,"pathome.html")
-
+@login_required
 def dochome(request):
-    return render(request,"dochome.html")
+    docreg_id = request.session.get('docreg_id')
+    
+    # Retrieve data relevant to the logged-in hospital
+    doclist = Docreg.objects.filter(id=docreg_id)
+    bookings = Book.objects.filter(doctor__in=[doc.fullname for doc in doclist])
+    return render(request,"dochome.html",{'doclist': doclist, 'bookings': bookings})
 
 @login_required
 def hosphome(request):
@@ -275,6 +274,21 @@ def hosphome(request):
 def confirm_appointment(request, booking_id):
     # Get the booking object
     booking = get_object_or_404(Book, id=booking_id)
+    booking.confirmed = True
+    booking.save()
+    try:
+            send_mail(
+                'appointment Confirm',
+                f'Your booking for hospital {booking.hospital} with Dr. {booking.doctor} is confirmed.',
+                'chapagaibidisha@gmail.com',  # From email
+                [booking.email],  # To email (user's email from the form)
+                fail_silently=False,
+            )
+    except Exception as e:
+            logger.error(f"Error sending email: {e}")
+    # Perform actions related to confirmation (e.g., send email)
+    # Assuming confirmation is successful, you can redirect to the same page or any other page
+    # For now, let's redirect to the same page
     # Perform actions related to confirmation (e.g., send email)
     # Assuming confirmation is successful, you can redirect to the same page or any other page
     # For now, let's redirect to the same page
