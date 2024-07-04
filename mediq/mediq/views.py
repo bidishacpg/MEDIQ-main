@@ -6,6 +6,7 @@ from hospreg.forms import hospregisterr, hosploginn
 from docreg.forms import docregisterr, docloginn
 from patientreg.forms import patregisterr, patloginn
 from Book.models import Book
+from contact.models import Contact
 from contact.forms import Contactform
 from patientreg.models import Patientreg
 from docreg.models import Docreg
@@ -25,6 +26,7 @@ def home(request):
     hospital_count = Hospreg.objects.count()
     doctor_count = Docreg.objects.count()
     patient_count = Patientreg.objects.count()# Fetch all doctors
+    contactlist = Contact.objects.all()
     
     if request.method == "GET":
         jb = request.GET.get('hospname')
@@ -37,6 +39,7 @@ def home(request):
            'hospital_count': hospital_count,
         'doctor_count': doctor_count,
         'patient_count': patient_count,  # Add doctors to the context
+        'contactlist':contactlist
     }
     
     return render(request, "index.html", context)

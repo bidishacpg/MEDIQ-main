@@ -102,7 +102,7 @@
             {% endif %}
             <h3>Dr. {{ doctor.fullname }}</h3>
             <p>{{ doctor.specialization }}</p>
-            <button class="btn"><a href="{'doctorprofile'}" class="no-underline">View Details</a></button>
+            <button class="btn"><a href="{% url 'doctorprofile' doctor.id %}" class="no-underline">View Details</a></button>
           </div>
         {% empty %}
           <p>No doctors available.</p>
@@ -111,24 +111,20 @@
   
       <div class="review-section">
         <h2>What our users say about us</h2>
+        {% for a in contactlist %}
         <div class="reviews">
           <!-- Example review card: -->
           <div class="review-card">
-            <div class="user-info">
-              <img src="/static/img/user1.jpg" alt="User">
-              <p>John Doe</p>
+            {% if a.photo %}
+              <img src="{{ doctor.photo.url }}" alt="">
+            {% endif %}
+              <p>{{a.username}}</p>
             </div>
             <p class="review-text">
-              "Excellent service! Quick response and professional staff."
+              {{a.feedback}}
             </p>
-            <div class="rating">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            </div>
           </div>
+          {% endfor %}
           <!-- Add more review cards as needed -->
         </div>
       </div>
