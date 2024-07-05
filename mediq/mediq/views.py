@@ -262,7 +262,20 @@ def services(request):
     return render(request,"services.html")
 
 def pathome(request):
-    return render(request,"pathome.html")
+    hosplist = Hospreg.objects.all()
+    doclist = Docreg.objects.all() 
+    contactlist = Contact.objects.all()
+    if request.method == "GET":
+        jb = request.GET.get('hospname')
+        if jb is not None:
+            hosplist = Hospreg.objects.filter(hospital_name__icontains=jb)
+    
+    context = {
+        'hosplist': hosplist,
+        'doclist': doclist,
+        'contactlist':contactlist
+    }
+    return render(request,"pathome.html",context)
 @login_required
 def dochome(request):
     docreg_id = request.session.get('docreg_id')

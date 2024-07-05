@@ -3,13 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/static/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title> MEDIQUICK</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>MEDIQUICK</title>
   </head>
   <body>
     <div class="container">
@@ -20,8 +17,8 @@
           <li class="link"><a href="aboutus/">About Us</a></li>
           <li class="link"><a href="/services">Services</a></li>
           <li class="link"><a href="/ambulance">Ambulance</a></li>
-          <li class="link"><a href="/doclist">Doctors</a></li>
-          <li class="link"><a href="hosplist/">Hospitals</a></li>
+          <li class="link"><a href="/patlogin">Doctors</a></li>
+          <li class="link"><a href="/patlogin">Hospitals</a></li>
           <li class="link"><a href="contact/">Contact</a></li>
           <li class="dropdown">
             <button class="dropbtn">Login/Register</button>
@@ -31,7 +28,7 @@
               <a href="doclogin/">Doctor</a>
             </div>
           </li>
-     <!--<button class="btn">Login/Register</button> -->
+        </ul>
       </nav>
       <header class="header">
         <div class="content">
@@ -48,146 +45,127 @@
         <div class="image">
           <span class="image__bg"></span>
           <img src="/static/img/cutu.jpg" alt="header image" />
-          </div>
         </div>
       </header>
-      
       <div class="info-bar">
         <div class="info-item">
-            <h3>{{ hospital_count }}</h3>
-            <p>Hospitals</p>
+          <h3>{{ hospital_count }}</h3>
+          <p>Hospitals</p>
         </div>
         <div class="info-item">
-            <h3>{{ doctor_count }}</h3>
-            <p>Doctors</p>
+          <h3>{{ doctor_count }}</h3>
+          <p>Doctors</p>
         </div>
         <div class="info-item">
-            <h3>{{ patient_count }}</h3>
-            <p>Patients</p>
+          <h3>{{ patient_count }}</h3>
+          <p>Patients</p>
         </div>
       </div>
-
-    <div class="our-hospitals-title">
-      <h2>Our Hospitals</h2>
-    </div>
+      <div class="our-hospitals-title">
+        <h2>Our Hospitals</h2>
+      </div>
       <div class="search">
-        <form method="get">
-            <input type="text" name="hospname" placeholder="Search for hospitals...">
-            <input type="submit" class="search-btn" value="Search">
+        <form method="get" class="search-bar">
+          <input type="text" name="hospname" placeholder="Search for hospitals..." />
+          <button type="submit">Search</button>
         </form>
       </div>
       <div class="hospitals">
-        {%for a in hosplist %}
+        {% for a in hosplist %}
         <div class="hospital">
-          {% if a.photo %} 
-          <img src="{{ a.photo.url }}" alt="">
-          {%endif%}
-          <h3>{{a.hospital_name}}Hospital</h3>
-          <p>Address:{{a.address}},{{a.city}}</p>
-          <button class="btn"><a href="{% url 'hospage' a.id %}" class="no-underline">View Details</a></button>
+          {% if a.photo %}
+          <img src="{{ a.photo.url }}" alt="" />
+          {% endif %}
+          <h3>{{ a.hospital_name }} Hospital</h3>
+          <p>Address: {{ a.address }}, {{ a.city }}</p>
         </div>
-        {%empty%}
-    No Hospitals 
+        {% empty %}
+        No Hospitals
         {% endfor %}
       </div>
-      <div class="our-hospitals-title">
+      <div class="our-doctors-title">
         <h2>Our Doctors</h2>
       </div>
-  
       <div class="doctors">
         {% for doctor in doclist %}
-          <div class="doctor">
-            {% if doctor.photo %}
-              <img src="{{ doctor.photo.url }}" alt="">
-            {% endif %}
-            <h3>Dr. {{ doctor.fullname }}</h3>
-            <p>{{ doctor.specialization }}</p>
-            <button class="btn"><a href="{% url 'doctorprofile' doctor.id %}" class="no-underline">View Details</a></button>
-          </div>
+        <div class="doctor" onclick="showDoctorDetails({{ doctor.id }})">
+          {% if doctor.photo %}
+          <img src="{{ doctor.photo.url }}" alt="" />
+          {% endif %}
+          <h3>Dr. {{ doctor.fullname }}</h3>
+          <p>{{ doctor.specialization }}</p>
+        </div>
         {% empty %}
-          <p>No doctors available.</p>
+        <p>No doctors available.</p>
         {% endfor %}
       </div>
-  
-      <div class="review-section">
-        <h2>What our users say about us</h2>
-        {% for a in contactlist %}
-        <div class="reviews">
-          <!-- Example review card: -->
-          <div class="review-card">
-            {% if a.photo %}
-              <img src="{{ a.photo.url }}" alt="">
-            {% endif %}
-              <p>{{a.username}}</p>
-            </div>
-            <p class="review-text">
-              {{a.feedback}}
-            </p>
-          </div>
-          <div class="rating">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-          </div>
-          {% endfor %}
-          <!-- Add more review cards as needed -->
+      <div id="doctor-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <div id="doctor-details"></div>
         </div>
       </div>
-  
-      <!-- Footer section -->
+      <div class="review-section">
+        <h2>What our users say about us</h2>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            {% for a in contactlist %}
+            <div class="swiper-slide">
+              <div class="review-card">
+                {% if a.photo %}
+                <img src="{{ a.photo.url }}" alt="" />
+                {% endif %}
+                <p>{{ a.username }}</p>
+                <p class="review-text">{{ a.feedback }}</p>
+                <div class="rating">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
     </div>
-  
     <!-- JavaScript libraries -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  </body>
-  </html>
-       <!--- <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-        <div class="hospital">
-          <img src="/static/img/Bir.png" alt="Hospital 2">
-          <h3>Hospital Name</h3>
-          <p>Location: ABC</p>
-          <button class="btn">View Details</button>
-        </div>
-    </div>-->
-    {% include "footer.html" %}
- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
+    <script>
+      function showDoctorDetails(doctorId) {
+        // Fetch and display doctor details based on doctorId
+        const modal = document.getElementById("doctor-modal");
+        const details = document.getElementById("doctor-details");
+        // Simulate fetching doctor details (replace with actual fetch call)
+        details.innerHTML = `<h3>Dr. ${doctorId}</h3><p>Specialization details...</p>`;
+        modal.style.display = "block";
+      }
+      function closeModal() {
+        document.getElementById("doctor-modal").style.display = "none";
+      }
+      const swiper = new Swiper(".swiper-container", {
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+      window.onclick = function (event) {
+        const modal = document.getElementById("doctor-modal");
+        if (event.target === modal) {
+          closeModal();
+        }
+      };
+    </script>
   </body>
 </html>
