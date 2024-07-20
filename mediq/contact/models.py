@@ -6,3 +6,6 @@ class Contact(models.Model):
     email=models.CharField(max_length=50)
     mobile=models.CharField(max_length=50)
     feedback=models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.username

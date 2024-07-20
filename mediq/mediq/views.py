@@ -62,7 +62,7 @@ def book(request):
         hospital = Hospreg.objects.get(id=hospital_id)
         doctor = Docreg.objects.get(id=doctor_id)
 
-        booking_count = Book.objects.filter(date=date).count()
+        booking_count = Book.objects.filter(date=date,hospital=hospital).count()
         if booking_count >= 5:
             return HttpResponse("Sorry, the maximum number of bookings for this date has been reached. Please select another date.")
 
@@ -325,12 +325,22 @@ def delete_appointment(request, booking_id):
     booking = get_object_or_404(Book, id=booking_id)
     # Perform deletion
     booking.delete()
+    try:
+            send_mail(
+                'appointment Deleted',
+                f'Sorry Your booking for hospital {booking.hospital} with Dr. {booking.doctor} is deleted due to technical errors.',
+                'chapagaibidisha@gmail.com',  # From email
+                [booking.email],  # To email (user's email from the form)
+                fail_silently=False,
+            )
+    except Exception as e:
+            logger.error(f"Error sending email: {e}")
     # Redirect to the same page or any other page after deletion
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def contact(request):
     if request.method == 'POST':
-        form = Contactform(request.POST)
+        form = Contactform(request.POST, request.FILES)  # Don't forget request.FILES for file uploads
         if form.is_valid():
             form.save()  # Save data to the database
             return redirect('contact')  # Redirect to a success page
