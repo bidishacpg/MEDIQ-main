@@ -166,6 +166,12 @@
             } else {
                 firstNameError.innerText = '';
             }
+            if (ageInput.value < 1) {
+                ageError.innerText = 'Age must be at least 1.';
+                isValid = false;
+            } else {
+                ageError.innerText = '';
+            }
     
             // Repeat the same validation logic for other fields
     
