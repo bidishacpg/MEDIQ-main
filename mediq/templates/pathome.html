@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="/static/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title> patient home page</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -63,38 +68,40 @@
         <h2>Our Hospitals</h2>
       </div>
       <div class="search">
-        <form method="get" class="search-bar">
-          <input type="text" name="hospname" placeholder="Search for hospitals..." />
-          <button type="submit">Search</button>
+        <form method="get" class="search-bar" onsubmit="return false;">
+          <input type="text" id="hospSearch" name="hospname" placeholder="Search for hospitals..." />
+          <button type="submit" onclick="searchHospitals()">Search</button>
         </form>
       </div>
-      <div class="hospitals">
+      <div id="hospitals" class="hospitals">
         {% for a in hosplist %}
-        <div class="hospital">
+        <div class="hospital {% if forloop.counter > 3 %}hidden{% endif %}">
           {% if a.photo %}
           <img src="{{ a.photo.url }}" alt="" />
           {% endif %}
           <h3>{{ a.hospital_name }} Hospital</h3>
           <p>Address: {{ a.address }}, {{ a.city }}</p>
         </div>
-        {% empty %}
-        No Hospitals
         {% endfor %}
       </div>
       <div class="our-doctors-title">
         <h2>Our Doctors</h2>
       </div>
-      <div class="doctors">
+      <div class="search">
+        <form method="get" class="search-bar" onsubmit="return false;">
+          <input type="text" id="docSearch" name="docname" placeholder="Search for doctors..." />
+          <button type="submit" onclick="searchDoctors()">Search</button>
+        </form>
+      </div>
+      <div id="doctors" class="doctors">
         {% for doctor in doclist %}
-        <div class="doctor" onclick="showDoctorDetails({{ doctor.id }})">
+        <div class="doctor {% if forloop.counter > 3 %}hidden{% endif %}" onclick="showDoctorDetails({{ doctor.id }})">
           {% if doctor.photo %}
           <img src="{{ doctor.photo.url }}" alt="" />
           {% endif %}
           <h3>Dr. {{ doctor.fullname }}</h3>
           <p>{{ doctor.specialization }}</p>
         </div>
-        {% empty %}
-        <p>No doctors available.</p>
         {% endfor %}
       </div>
       <div id="doctor-modal" class="modal">
@@ -137,22 +144,62 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script>
       function showDoctorDetails(doctorId) {
-        // Fetch and display doctor details based on doctorId
         const modal = document.getElementById("doctor-modal");
         const details = document.getElementById("doctor-details");
-        // Simulate fetching doctor details (replace with actual fetch call)
         details.innerHTML = `<h3>Dr. ${doctorId}</h3><p>Specialization details...</p>`;
         modal.style.display = "block";
       }
+  
       function closeModal() {
         document.getElementById("doctor-modal").style.display = "none";
       }
+  
       window.onclick = function (event) {
         const modal = document.getElementById("doctor-modal");
         if (event.target === modal) {
           closeModal();
         }
       };
+  
+      function searchHospitals() {
+        const query = document.getElementById('hospSearch').value.toLowerCase();
+        const hospitals = document.querySelectorAll('#hospitals .hospital');
+        let count = 0;
+        hospitals.forEach(hospital => {
+          const name = hospital.querySelector('h3').innerText.toLowerCase();
+          if (name.includes(query) || query === "") {
+            hospital.classList.remove('hidden');
+            if (++count > 3 && query === "") {
+              hospital.classList.add('hidden');
+            }
+          } else {
+            hospital.classList.add('hidden');
+          }
+        });
+      }
+  
+      function searchDoctors() {
+        const query = document.getElementById('docSearch').value.toLowerCase();
+        const doctors = document.querySelectorAll('#doctors .doctor');
+        let count = 0;
+        doctors.forEach(doctor => {
+          const name = doctor.querySelector('h3').innerText.toLowerCase();
+          if (name.includes(query) || query === "") {
+            doctor.classList.remove('hidden');
+            if (++count > 3 && query === "") {
+              doctor.classList.add('hidden');
+            }
+          } else {
+            doctor.classList.add('hidden');
+          }
+        });
+      }
+  
+      document.addEventListener('DOMContentLoaded', () => {
+        searchHospitals(); // Call the search function to apply the initial filter
+        searchDoctors(); // Call the search function to apply the initial filter
+      });
     </script>
   </body>
-</html>
+  </html>
+  

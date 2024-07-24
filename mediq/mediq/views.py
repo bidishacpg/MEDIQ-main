@@ -266,7 +266,11 @@ def services(request):
 def pathome(request):
     hosplist = Hospreg.objects.all()
     doclist = Docreg.objects.all() 
+    hospital_count = Hospreg.objects.count()
+    doctor_count = Docreg.objects.count()
+    patient_count = Patientreg.objects.count()# Fetch all doctors
     contactlist = Contact.objects.all()
+
     if request.method == "GET":
         jb = request.GET.get('hospname')
         if jb is not None:
@@ -275,6 +279,9 @@ def pathome(request):
     context = {
         'hosplist': hosplist,
         'doclist': doclist,
+         'hospital_count': hospital_count,
+        'doctor_count': doctor_count,
+        'patient_count': patient_count,
         'contactlist':contactlist
     }
     return render(request,"pathome.html",context)
