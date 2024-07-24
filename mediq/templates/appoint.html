@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required>
+                <input type="number" id="age" name="age" required min="1">
                 <small class="error-message" id="ageError"></small>
             </div>
 
@@ -155,6 +155,7 @@
             const regex = /^[0-9]{10}$/;
             return regex.test(phone);
         };
+        
     
         // Function to validate form fields
         const validateForm = () => {
