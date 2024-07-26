@@ -313,7 +313,7 @@ def confirm_appointment(request, booking_id):
     booking.save()
     try:
             send_mail(
-                'appointment Confirm',
+                'Appointment Confirmed',
                 f'Your booking for hospital {booking.hospital} with Dr. {booking.doctor} is confirmed.',
                 'chapagaibidisha@gmail.com',  # From email
                 [booking.email],  # To email (user's email from the form)
@@ -336,7 +336,7 @@ def delete_appointment(request, booking_id):
     booking.delete()
     try:
             send_mail(
-                'appointment Deleted',
+                'Appointment Deleted',
                 f'Sorry Your booking for hospital {booking.hospital} with Dr. {booking.doctor} is deleted due to technical errors.',
                 'chapagaibidisha@gmail.com',  # From email
                 [booking.email],  # To email (user's email from the form)
